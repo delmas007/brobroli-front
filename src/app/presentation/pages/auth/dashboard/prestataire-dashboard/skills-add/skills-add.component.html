@@ -1,0 +1,21 @@
+<main>
+    <div class="registration-container">
+        <a routerLink="/dashboard-prestataire" class="flex items-center gap-1 mb-4 hover:text-[#14C0B7]"><mat-icon>arrow_back</mat-icon> Tableau de bord</a>
+        <div class="flex justify-center items-center mb-6">
+            <span class="text-2xl text-center font-bold">Ajouter vos compétences</span>
+        </div>
+        <form  [formGroup]="formSkills" (ngSubmit)="onSkillsSubmit()">
+            <div class="form-row">
+                <label for="serviceName">Compétence</label>
+                <input type="text" id="serviceName" name="serviceName" title="Compétence" required formControlName="skillName">
+                <label for="serviceName">Niveau d'expérience</label>
+                <select id="serviceName" name="serviceName" title="Type de service" required formControlName="skillLevel">
+                    <option value="DEBUTANT">Débutant</option>
+                    <option value="INTERMEDIAIRE">Intermédiaire</option>
+                    <option value="AVANCE">Avancé</option>
+                </select>
+            </div>
+            <button class="btn-link" type="submit">Ajouter</button>
+        </form>
+    </div>
+</main>

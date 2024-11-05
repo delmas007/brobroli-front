@@ -1,0 +1,30 @@
+<main>
+    <div class="registration-container">
+        <a routerLink="/dashboard-prestataire" class="flex items-center gap-1 mb-4 hover:text-[#14C0B7]"><mat-icon>arrow_back</mat-icon> Tableau de bord</a>
+        <div class="flex justify-center items-center mb-6">
+            <span class="text-2xl text-center font-bold">Ajouter les services que vous offrez</span>
+        </div>
+        <p *ngIf="successMessage" class="text-sm text-center text-green-500">{{ successMessage }}</p>
+        <p *ngIf="errorMessage" class="text-sm text-center text-red-500">{{ errorMessage }}</p>
+        <form  [formGroup]="servicesForm" (ngSubmit)="onServicesSubmit()">
+            <div class="form-row">
+                <label for="serviceName">Type de service</label>
+                <select id="serviceName" name="serviceName" title="Type de service" required formControlName="typeService">
+                    <option value="DEVELOPPEMENT_WEB">Développement web</option>
+                    <option value="DEVELOPPEMENT_MOBILE">Développement mobile</option>
+                    <option value="DESIGN_GRAPHIQUE">Design graphique</option>
+                    <option value="FORMATION">Formation</option>
+                    <option value="MARKETING">Marketing</option>
+                    <option value="PHOTOGRAPHIE">Photographie</option>
+                </select>
+                <label for="serviceName">Titre du service</label>
+                <input id="serviceName" name="serviceName" placeholder="Création de site web" required formControlName="description">
+                <label for="serviceName">Prix du service</label>
+                <input type="number" id="serviceName" name="serviceName" required formControlName="price">
+                <label for="serviceName">Durée de la mission(en heures)</label>
+                <input type="number" id="serviceName" name="serviceName" placeholder="345" required formControlName="duration">
+            </div>
+            <button class="btn-link" type="submit">Ajouter</button>
+        </form>
+    </div>
+</main>

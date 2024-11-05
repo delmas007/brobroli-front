@@ -1,0 +1,13 @@
+<div *ngIf="slides && slides.length > 0" class="card left" >
+    <div *ngFor="let slide of slides; let i=index" class="card-left-slide" [ngClass]="{'active': selectedSlide === i}">
+        <img  loading="lazy" class="freelancer" [src]="slide.imageSrc" [alt]="slide.imageAlt">
+        <div class="flex flex-col justify-between w-full">
+            <p class="dash-section-1-card-left-titre">{{slide.title}}</p>
+            <h3 class="dash-section-1-card-left-text">{{slide.text}}</h3>
+            <a (click)="executeAction(slide.action)" [routerLink]="slide.url" class="btn-link dash-section-card-left-1-btn-link">{{slide.btnText}}</a>
+        </div>
+    </div>
+    <div *ngIf="indicators" class="point-slide">
+        <span *ngFor="let dot of slides; let i=index" [ngClass]="{'current': selectedSlide === i}" (click)="selectSlide(i)"></span>
+    </div>
+</div>

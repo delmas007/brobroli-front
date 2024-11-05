@@ -1,0 +1,162 @@
+main {
+  section {
+    height: 100dvh;
+    display: flex;
+  }
+
+  section aside.responsive {
+    display: none;
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    animation: 0.6s cubic-bezier(.25, 1, .30, 1) wipe-out-left both;
+  }
+
+  @keyframes wipe-out-left {
+    from { clip-path: inset(0 0 0 0); }
+    to { clip-path: inset(0 100% 0 0); }
+  }
+
+  section aside {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-top: 1px solid #00000010;
+    border-right: 1px solid #00000010;
+    min-width: 20%;
+    max-width: 20%;
+    height: 100%;
+    padding: 1rem;
+    background: rgb(200,251,248);
+    background: linear-gradient(135deg, rgba(200,251,248,1) 0%, rgba(255,255,255,1) 70%);
+    animation: slideIn 0.5s ease forwards;
+  }
+
+  section aside hr {
+    border: 0.5px solid #00000035;
+    border-radius: 15px;
+    width: 100%;
+  }
+
+  section aside h4 {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  section aside .btn-retour {
+    display: flex;
+    gap: 0.6rem;
+    align-items: center;
+    margin: 0.5rem 0;
+  }
+
+  section aside .btn-retour:hover {
+    color: #14C0B7;
+  }
+
+  section aside a {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.6rem;
+    margin: 2rem 0;
+    transition: all 0.3s ease;
+  }
+
+  section aside a.current {
+    padding: 0.2rem 1rem;
+    background-color: #14C0B7;
+    border-radius: 15px;
+    color: #fff;
+    transition: all 0.3s ease;
+  }
+
+  section aside a:hover {
+    padding-left: 0.7rem;
+    border-radius: 15px;
+  }
+
+  section aside a.current:hover {
+    padding-left: 0.4rem;
+  }
+}
+
+.aside-btn {
+  padding: 0.2rem 0.5rem;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 0;
+  top: 100px;
+  background-color: #14C0B7;
+  color: #fff;
+  border-radius: 0 15px 15px 0;
+  z-index: 1;
+}
+
+.aside-btn.open {
+  left: 50%;
+  transition: 0.6s cubic-bezier(.25, 1, .30, 1);
+}
+
+.aside-btn.open i {
+  transform: rotate(180deg);
+  transition: all 0.3s ease;
+}
+
+app-profile {
+  width: 100%;
+}
+
+@media screen and (max-width: 868px) {
+  main section aside {
+    width: 15%;
+  }
+
+  main section aside span {
+    display: none;
+  }
+
+  main section aside a.current {
+    justify-content: center;
+    padding-left: 0.4rem;
+    padding-right: 0.4rem;
+  }
+
+  main section aside h4 {
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 768px) {}
+
+@media screen and (max-width: 668px) {
+  main section aside {
+    display: none;
+  }
+
+  main section aside.responsive {
+    display: flex;
+    animation: 0.6s cubic-bezier(.25, 1, .30, 1) wipe-in-right both;
+  }
+
+  @keyframes wipe-in-right {
+    from { clip-path: inset(0 100% 0 0); }
+    to { clip-path: inset(0 0 0 0); }
+  }
+
+  main section aside.responsive span {
+    display: block;
+  }
+
+  .aside-btn {
+    display: flex;
+  }
+}

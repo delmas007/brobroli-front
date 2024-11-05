@@ -1,0 +1,105 @@
+<app-navbar></app-navbar>
+<div class="hero">
+  <div class="overlay-hero"></div>
+  <div class="hero-left">
+      <img loading="lazy"  src="media/images/hero1.jpg" alt="hero1">
+  </div>
+  <div class="hero-right">
+      <h1>Trouver des <span class="main-color">freelancers</span> qualifiés pour vos taches</h1>
+
+      <form  class="search-container" [formGroup]="searchForm" (ngSubmit)="onSearch()">
+        <div class="select-container">
+          <img src="media/images/travailleur-96.png" alt="" >
+          <div class="select-objet">
+            <label for="service">Type de service</label>
+            <select name="" id="" title="Choisir le type de service" formControlName="typeService">
+<!--              <option *ngFor="let service of services" [value]="service.value">{{ service.label }}</option>-->
+              <option value="DEVELOPPEMENT_WEB">Développement web</option>
+              <option value="DEVELOPPEMENT_MOBILE">Développement mobile</option>
+              <option value="DESIGN_GRAPHIQUE">Design graphique</option>
+              <option value="FORMATION">Formation</option>
+              <option value="MARKETING">Marketing</option>
+              <option value="PHOTOGRAPHIE">Photographie</option>
+            </select>
+          </div>
+        </div>
+        <div class="select-container select2">
+          <img src="media/images/money-96.png" alt="" >
+          <div class="select-objet">
+            <label for="priceRange">Tranche de prix</label>
+            <select name="" id="" title="Choisir la tranche de prix" formControlName="tranche">
+              <option value="25000-100000">25k-100k</option>
+              <option value="100000-300000">100k-300k</option>
+              <option value="300000-600000">300k-600k</option>
+              <option value="600000-1000000">600k-1M</option>
+            </select>
+          </div>
+        </div>
+          <button type="submit"><img class="icon-search" src="media/images/icon-search.png" alt=""></button>
+      </form>
+
+      <div class="skill-marquee-container">
+        <span class="skill-marquee-title">Réseaux de services</span>
+        <div class="flex">
+          <div class="marquee">
+            <img loading="lazy" src="media/images/atos.png" alt="">
+            <img loading="lazy" src="media/images/emploie-jeune.png" alt="">
+            <img loading="lazy" src="media/images/orange.png" alt="">
+            <img loading="lazy" src="media/images/giz.png" alt="">
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+
+<section class="section-1">
+
+  <div class="title-container flex justify-between items-center flex-wrap">
+    <div data-aos="fade-right" data-aos-duration="200" data-aos-offset="100">
+      <h1>Services proposée</h1>
+      <p>Explorer les services proposer par nos freelancers.</p>
+    </div>
+    <a data-aos="fade-left" data-aos-duration="200" data-aos-offset="100" class="btn-link" routerLink="/services" >Voir les services</a>
+  </div>
+  <div class="card-grid">
+
+    <div class="card card-1">
+      <div class="card-overlay"></div>
+      <div class="card-content">
+        <span class="card-title">Creation d'application web</span>
+        <div class="flex justify-end w-full">
+          <a class="service btn-link" href="http://">Découvrir</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card card-2">
+      <div class="card-overlay"></div>
+      <div class="card-content">
+        <span class="card-title">Creation d'affiche et de logo</span>
+        <div class="flex justify-end w-full">
+          <a class="service btn-link" href="http://">Découvrir</a>
+        </div>
+      </div>
+    </div>
+
+    <div  class="card card-3">
+      <div class="card-overlay"></div>
+      <div class="card-content">
+        <span class="card-title">Montage vidéo</span>
+        <div class="flex justify-end w-full">
+          <a class="service btn-link" href="http://">Découvrir</a>
+        </div>
+      </div>
+    </div>
+    <div class="card card-4">
+      <div class="card-overlay"></div>
+      <div class="card-content">
+        <span class="card-title">Couverture photographique</span>
+        <div class="flex justify-end w-full">
+          <a class="service btn-link" href="http://">Découvrir</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

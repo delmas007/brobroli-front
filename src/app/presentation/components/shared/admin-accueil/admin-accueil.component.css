@@ -1,0 +1,22 @@
+.card{
+  border-radius: 15px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  padding: 0.5rem;
+}
+.card-lg{
+  width: 100%;
+  background-color: #e7fffe;
+}
+.card-m{
+  width: 60%;
+  background: rgb(35,38,44);
+  background: linear-gradient(90deg, rgba(35,38,44,1) 0%, rgba(26,37,36,1) 100%);
+}
+canvas{
+  height: 250px !important;
+  /* width: 100% !important; */
+}
+.card-lg-2{
+  width: 100%;
+  background-color: #f8fefe;
+}

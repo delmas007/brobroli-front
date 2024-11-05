@@ -1,0 +1,58 @@
+<main>
+    <div class="registration-container">
+        <div class="flex justify-center items-center mb-4">
+            <span class="text-2xl font-bold">Complétion de l'inscription {{ userRole === 'provider' ? 'Prestataire' : 'Client' }}</span>
+        </div>
+        
+        <div class="progress-bar">
+          <div class="progress" [style.width]="(currentStep / totalSteps) * 100 + '%'"></div>
+        </div>
+        
+        <form (ngSubmit)="onSubmit()">
+          <div *ngFor="let questionGroup of questions[userRole][currentStep - 1]; let i = index">
+            <div class="form-row">
+              <label [for]="'question' + i">{{ questionGroup.question }}</label>
+              
+              <ng-container [ngSwitch]="questionGroup.type">
+                <input *ngSwitchCase="'text'" 
+                  [id]="'question' + i" 
+                  [(ngModel)]="answers[questionGroup.question]" 
+                  [name]="'question' + i" 
+                  type="text" 
+                  required>
+                
+                <textarea *ngSwitchCase="'textarea'" 
+                  [id]="'question' + i" 
+                  [(ngModel)]="answers[questionGroup.question]" 
+                  [name]="'question' + i" 
+                  required></textarea>
+                
+                <select *ngSwitchCase="'select'" 
+                  [id]="'question' + i" 
+                  [(ngModel)]="answers[questionGroup.question]" 
+                  [name]="'question' + i" 
+                  required>
+                  <option *ngFor="let option of questionGroup.options" [value]="option">{{ option }}</option>
+                </select>
+                
+                <div *ngSwitchCase="'checkbox'">
+                  <div *ngFor="let option of questionGroup.options; let j = index">
+                    <input type="checkbox" 
+                      [id]="'question' + i + '_' + j"
+                      [(ngModel)]="answers[questionGroup.question][j]"
+                      [name]="'question' + i + '_' + j">
+                    <label [for]="'question' + i + '_' + j">{{ option }}</label>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+          <span class="text-center mt-4">En cliquant sur "Terminer", vous acceptez nos <a class="terms-link" routerLink="/terms-and-conditions">conditions d'utilisation</a>.</span>
+          <div class="navigation-buttons">
+            <button type="button" class="btn-link" (click)="previousStep()" [disabled]="currentStep === 1">Précédent</button>
+            <button type="button" class="btn-link" *ngIf="currentStep < totalSteps" (click)="nextStep()">Suivant</button>
+            <button type="submit" class="btn-link" *ngIf="currentStep === totalSteps">Terminer</button>
+          </div>
+        </form>
+      </div>
+</main>

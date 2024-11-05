@@ -1,0 +1,98 @@
+<app-navbar></app-navbar>
+<main>
+  <div class="modal-overlay" *ngIf="modalCollabOpen">
+    <div class="modal-content">
+      <div class="w-full flex justify-end"><button (click)="modalCollabOpen = !modalCollabOpen" class="close-menu"><span></span></button></div>
+      <hr class="my-2">
+      <h4 class="text-center py-1">Collaboration</h4>
+      <div class="flex flex-col gap-2 justify-between">
+        <p>Vous êtes sur le point de commencer une collaboration
+          . Le montant de la collaboration est de <span class="font-bold">{{formatPrice(abuy)}}</span>.
+        </p>
+        <p>Votre paiement sera sur un compte bloqué et sera délivré au prestataire lorsque vous aurez validé la fin de la collaboration.</p>
+        <p>Vous avez la possibilité d'annuler cette collaboration et vous faire rembourser tant que le prestataire n'a pas encore accepté votre demande.</p>
+        <div *ngIf="errorMessage" class="transition-all duration-300 text-center">
+          <p class="error-message">{{errorMessage}}</p>
+        </div>
+        <button *ngIf="showPayButton" (click)="collaborer()" class="btn-link w-full">Payer</button>
+      </div>
+    </div>
+  </div>
+
+  <section class=" search-section1">
+    <h3>Services</h3>
+    <img src="media/images/menu-dash.png" alt="">
+  </section>
+  <section class="flex">
+    <aside class="aside-filter w-64 min-h-screen p-4">
+      <div class="flex flex-col gap-4">
+        <div class="flex items-center justify-between">
+          <span class="text-2xl font-bold">Filtres</span>
+        </div>
+        <div class="flex flex-col gap-2">
+          <label class="text-sm font-medium">Trier par</label>
+          <select class="input-style">
+            <option>Note</option>
+            <option>Prix</option>
+          </select>
+        </div>
+        <div class="flex flex-col gap-2">
+          <label class="text-sm font-medium">Compétences</label>
+          <select class="input-style">
+            <option>Design</option>
+            <option>Développement</option>
+            <option>Marketing</option>
+          </select>
+        </div>
+        <div class="flex flex-col gap-2">
+          <label class="text-sm font-medium">Type de travail</label>
+          <select class="input-style">
+            <option>Temps plein</option>
+            <option>Temps partiel</option>
+            <option>Freelance</option>
+          </select>
+        </div>
+
+        <div class="flex flex-col gap-2">
+          <label class="text-sm font-medium">Salaire</label>
+          <input type="range" id="range1"/>
+        </div>
+        <button class="btn-link">Appliquer</button>
+      </div>
+    </aside>
+    <div class="card-container">
+      <div *ngFor="let service of services" class="card-profile">
+        <div class="card-top">
+          <div class="flex justify-between items-center">
+            <div class="stars-container">
+              <img class="star"  loading="lazy" src="media/images/star-fill.png" alt="">
+              <img class="star"  loading="lazy" src="media/images/star-fill.png" alt="">
+              <img class="star"  loading="lazy" src="media/images/star-fill.png" alt="">
+              <img class="star"  loading="lazy" src="media/images/star-fill.png" alt="">
+              <img class="star"  loading="lazy" src="media/images/star-empty.png" alt="">
+            </div>
+            <div class="saved">
+              <mat-icon>bookmark</mat-icon>
+            </div>
+          </div>
+          <div class="flex justify-between items-center">
+            <h4 class="text-titre">{{ service.description }}</h4>
+            <mat-icon>monitor</mat-icon>
+          </div>
+          <div class="work-mode">
+            <span *ngFor="let skill of service.provider.skills">{{ skill }}</span>
+          </div>
+        </div>
+        <div class="card-bottom">
+          <div>
+            <p class="price">{{ formatPrice(service.price)}}</p>
+            <p class="location">Cocody</p>
+          </div>
+          <a (click)="openCollabModal(service.id, service.price)" class="btn-link">Collaborer</a>
+
+        </div>
+      </div>
+    </div>
+
+  </section>
+</main>

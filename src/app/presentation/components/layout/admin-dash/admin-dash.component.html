@@ -1,0 +1,25 @@
+<main>
+  <section>
+    <aside>
+      <div class="w-full">
+        <h4 ><i class="pi pi-cog"></i><span class="font-bold">Board</span></h4>
+        <hr class="my-3 ">
+      </div>
+      <div class=" flex-col justify-start py-2">
+        <a class="" routerLink="/delmas/accueil" routerLinkActive="current" ><i class="pi pi-user"></i> <span>Accueil</span></a>
+        <a class="" routerLink="/delmas/customers" routerLinkActive="current" ><i class="pi pi-credit-card"></i> <span>Client</span></a>
+        <a class="" routerLink="/delmas/providers" routerLinkActive="current" ><i class="pi pi-sliders-h"></i> <span>Prestataire</span></a>
+        <a class="" routerLink="/delmas/settings" routerLinkActive="current" ><i class="pi pi-shield"></i> <span>Paramètres</span></a>
+      </div>
+      <div class="py-2 w-full">
+        <hr class="my-3 ">
+        <a (click)="retour()" routerLink="/dashboard" class="btn-retour"><i class="pi pi-angle-left"></i>Retour</a>
+      </div>
+    </aside>
+    <button (click)="asideToggle()"title="sidebar" type="button" class="aside-btn" [ngClass]="{'open': isAsideOpen}">
+      <i class="pi pi-angle-right"></i>
+    </button>
+    <router-outlet></router-outlet>
+  </section>
+</main>
+

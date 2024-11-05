@@ -1,0 +1,182 @@
+<main>
+
+
+    <header class="bg-white  flex items-center justify-between p-4">
+        <a routerLink="/" class="flex items-center">
+            <img class="logo" src="media/images/Logo.png" alt="">
+        </a>
+
+        <div class="flex items-center">
+            <button class="flex items-center text-gray-700 mr-4">
+                <img loading="lazy" class="bell" src="media/images/notif.png" alt="">
+            </button>
+            <button (click)="menuOpen = !menuOpen" class="flex items-center text-gray-700">
+                <img loading="lazy" class="h-12 w-12 rounded-full object-cover" src="media/images/profile.png" alt="Photo de profil">
+            </button>
+
+
+            <div *ngIf="menuOpen" class="dash-profile-menu bg-white rounded-md shadow-lg py-1">
+                <div class="w-full flex justify-end"><button (click)="menuOpen = !menuOpen" class="close-menu"><span></span></button></div>
+                <h4 class="text-center py-1">Menu</h4>
+                <hr>
+                <a routerLink="/settings" class="flex items-center px-4 py-2 text-base  hover:bg-gray-100"><mat-icon class="w-5 h-5 mr-2 text-[#14C0B7]">settings</mat-icon> Paramètres</a>
+                <hr>
+                <a routerLink="/login" class="flex items-center px-4 py-2 text-base  hover:bg-gray-100"><mat-icon class="w-5 h-5 mr-2 text-[#14C0B7]">logout</mat-icon> Déconnexion</a>
+                <hr>
+            </div>
+        </div>
+    </header>
+    <section>
+      <div *ngIf="pendingCollaborations.length > 0">
+        <span class="text-xl font-bold">En attente de collaboration</span>
+        <div *ngFor="let collaboration of pendingCollaborations" class="bg-white rounded-2xl shadow-lg p-4 flex flex-col md:flex-row items-center justify-between gap-4 mb-2">
+          <img loading="lazy" class="h-12 w-12 rounded-full object-cover" src="media/images/profile.png" alt="Photo de profil">
+          <span class="text-md font-semibold text-center md:text-left">{{ collaboration.firstNameCutomer }}</span>
+          <span class="text-md font-semibold text-center md:text-left">{{ collaboration.serviceDescription }}</span>
+          <span class="text-md font-semibold text-center md:text-left">{{ collaboration.crationDateCollaboration | date:'short' }}</span>
+          <div class="flex gap-2">
+            <button (click)="onRefuse(collaboration.idCollaboration)" class="btn-link false"><mat-icon>close</mat-icon></button>
+            <button (click)="onAccept(collaboration.idCollaboration)" class="btn-link true"><mat-icon>check</mat-icon></button>
+          </div>
+        </div>
+      </div>
+
+      <section class="dash-section-3">
+        <span class="text-2xl font-bold">Mes projets</span>
+        <table>
+          <thead>
+          <tr>
+            <th>Freelancer</th>
+            <th>Tâche</th>
+            <th>Date</th>
+            <th>Statut</th>
+            <th>Action</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let collaboration of otherCollaborations">
+            <td>{{ collaboration.firstNameCutomer }}</td>
+            <td>{{ collaboration.serviceDescription }}</td>
+            <td>{{ collaboration.crationDateCollaboration | date:'short' }}</td>
+            <td>
+              <p [ngClass]="{
+                'pending': collaboration.status === 'EN_COURS',
+                'done': collaboration.status === 'TERMINE',
+                'refused': collaboration.status === 'REFUSE',
+                'cancelled': collaboration.status === 'ANNULER'
+              }">
+                {{ getCollaborationStatusLabel(collaboration.status) }}
+              </p>
+            </td>
+            <td *ngIf="collaboration.status === 'ACCEPTE' && collaboration.statusProvider!='TERMINE'" class="flex  relative">
+              <a (click)="onCompleteProject(collaboration.idCollaboration)" class="btn-link flex my-2 items-center gap-2">
+                <mat-icon>check_circle</mat-icon>
+                Terminer
+              </a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </section>
+<!--      <section class="dash-section-3">-->
+<!--        <span class="text-2xl font-bold">Mes projets</span>-->
+<!--        <table>-->
+<!--          <thead>-->
+<!--          <tr>-->
+<!--            <th>Freelancer</th>-->
+<!--            <th>Tâche</th>-->
+<!--            <th>Date</th>-->
+<!--            <th>Statut</th>-->
+<!--            <th>Action</th>-->
+<!--          </tr>-->
+<!--          </thead>-->
+<!--          <tbody>-->
+<!--          <tr *ngFor="let collaboration of otherCollaborations">-->
+<!--            <td>{{ collaboration.firstNameCutomer }}</td>-->
+<!--            <td>{{ collaboration.serviceDescription }}</td>-->
+<!--            <td>{{ collaboration.crationDateCollaboration | date:'short' }}</td>-->
+<!--            <td>-->
+<!--              <p [ngClass]="{-->
+<!--                'pending': collaboration.status === 'EN_COURS',-->
+<!--                'done': collaboration.status === 'TERMINE',-->
+<!--                'refused': collaboration.status === 'REFUSE',-->
+<!--                'cancelled': collaboration.status === 'ANNULER'-->
+<!--              }">-->
+<!--                {{ getCollaborationStatusLabel(collaboration.status) }}-->
+<!--              </p>-->
+<!--            </td>-->
+<!--            <td *ngIf="collaboration.status === 'TERMINE'" class="flex justify-center relative">-->
+<!--              <a class="cursor-pointer" (click)="onShowMenu(collaboration.idCollaboration)">-->
+<!--                <mat-icon>more_vert</mat-icon>-->
+<!--              </a>-->
+
+<!--&lt;!&ndash;              <a *ngIf="collaboration.status === 'EN_COURS'" (click)="onCompleteProject(collaboration.idCollaboration)" class="flex my-2 items-center gap-2">&ndash;&gt;-->
+<!--&lt;!&ndash;                <mat-icon>check_circle</mat-icon>&ndash;&gt;-->
+<!--&lt;!&ndash;                Terminer le projet&ndash;&gt;-->
+<!--&lt;!&ndash;              </a>&ndash;&gt;-->
+<!--              <hr>-->
+<!--            </td>-->
+<!--            <div *ngIf="menuProjectOpen && selectedProjectId === collaboration.idCollaboration" class="overlay-menu">-->
+<!--              <div class="w-full flex justify-end"><button (click)="menuProjectOpen = !menuProjectOpen" class="close-menu"><span></span></button></div>-->
+<!--              <a (click)="onDownloadInvoice(collaboration.idCollaboration)" class="flex my-2 items-center gap-2">-->
+<!--                <mat-icon>stars</mat-icon>-->
+<!--                Noter le projet-->
+<!--              </a>-->
+<!--              <hr>-->
+<!--              <a (click)="onDeleteProject(collaboration.idCollaboration)" class="flex my-2 items-center gap-2">-->
+<!--                <mat-icon>delete</mat-icon>-->
+<!--                Supprimer le projet-->
+<!--              </a>-->
+<!--              <hr>-->
+<!--            </div>-->
+
+<!--          </tr>-->
+<!--          </tbody>-->
+<!--        </table>-->
+<!--      </section>-->
+      </section>
+
+
+<!--    <section class="dash-section-3">-->
+<!--        <span class="text-2xl font-bold">Mes projets</span>-->
+<!--        <table>-->
+<!--            <thead>-->
+<!--                <tr>-->
+<!--                    <th>Freelancer</th>-->
+<!--                    <th>Tâche</th>-->
+<!--                    <th>Date</th>-->
+<!--                    <th>Statut</th>-->
+<!--                    <th>Action</th>-->
+<!--                </tr>-->
+<!--            </thead>-->
+<!--            <tbody>-->
+<!--                <tr *ngFor="let project of projects">-->
+<!--                    <td>{{ project.freelancer }}</td>-->
+<!--                    <td>{{ project.task }}</td>-->
+<!--                    <td>{{ project.date }}</td>-->
+<!--                    <td><p [ngClass]="{'pending': project.status === 'En cours', 'done': project.status === 'Terminé'}">{{ project.status }}</p></td>-->
+<!--                    <td *ngIf="project.status === 'Terminé'" class="flex justify-center relative">-->
+<!--                        <a class="cursor-pointer" (click)="onShowMenu(project.id)">-->
+<!--                            <mat-icon>more_vert</mat-icon>-->
+<!--                        </a>-->
+
+<!--                        <div *ngIf="menuProjectOpen && selectedProjectId === project.id" class="overlay-menu">-->
+<!--                            <div class="w-full flex justify-end"><button (click)="menuProjectOpen = !menuProjectOpen" class="close-menu"><span></span></button></div>-->
+<!--                            <a (click)="onDownloadInvoice(project.id)" class="flex my-2 items-center gap-2">-->
+<!--                                <mat-icon>stars</mat-icon>-->
+<!--                                Noter le projet-->
+<!--                            </a>-->
+<!--                            <hr>-->
+<!--                            <a (click)="onDeleteProject(project.id)" class="flex my-2 items-center gap-2">-->
+<!--                                <mat-icon>delete</mat-icon>-->
+<!--                                Supprimer le projet-->
+<!--                            </a>-->
+<!--                            <hr>-->
+<!--                        </div>-->
+
+<!--                    </td>-->
+<!--                </tr>-->
+<!--            </tbody>-->
+<!--        </table>-->
+<!--    </section>-->
+</main>

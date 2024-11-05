@@ -1,0 +1,57 @@
+main{
+    min-height: 100dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(200,251,248);
+    background: linear-gradient(135deg, rgb(227, 252, 250) 0%, rgba(255,255,255,1) 70%);
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+}
+.card-profile{
+    border-radius: 20px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    background-color: #fff;
+    padding: 2rem;
+}
+.btn-whatsapp{
+    background-color: #25D366;
+    border-radius: 15px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.1rem 1rem;
+    font-weight: 600;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+}
+.btn-mail{
+    background-color: #757575;
+    border-radius: 15px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.1rem 1rem;
+    font-weight: 600;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.btn-whatsapp img, .btn-mail img{
+    width: 20px;
+    height: 20px;
+}
+.work-mode{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+.work-mode span{
+    margin-right: 0.5rem;
+    padding: 0.1rem 0.6rem;
+    border-radius: 15px;
+    border: 1px solid #000;
+    font-size: 0.8rem;
+
+}

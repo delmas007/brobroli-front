@@ -1,0 +1,26 @@
+<main class="flex w-full justify-center">
+    <div [ngClass]="{'navbar': true, 'scrolled': isScrolled}">
+        <a routerLink="/" routerLinkActive="active" ariaCurrentWhenActive="page"><img  src="media/images/Logo.png" alt=""></a>
+        <div class="nav-links">
+            <a href="">Catégories</a>
+            <a href="">Services</a>
+            <a href="">Clients</a>
+        </div>
+        <div class="hamburger" (click)="toggleMenu()" [ngClass]="{'active': isMenuOpen}">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <a *ngIf="!isAuth"  routerLink="/login" routerLinkActive="active" ariaCurrentWhenActive="page" class="btn-connexion">Se connecter</a>
+        <a *ngIf="isAuth" (click)="deconnexion()" routerLinkActive="active" ariaCurrentWhenActive="page" class="btn-connexion">Deconnexion</a>
+    </div>
+    <div class="menu-modal" [ngClass]="{'active': isMenuOpen}">
+
+        <a  routerLink="/login"><img src="media/images/user.png" alt=""><span>Connexion</span></a>
+        <a routerLink="/dashboard"><img src="media/images/cat.png" alt=""><span>Catégories</span></a>
+        <a routerLink="/dashboard"><img src="media/images/client.png" alt=""><span>Clients</span></a>
+        <a routerLink="/dashboard"><img src="media/images/service.png" alt=""><span>Services</span></a>
+    </div>
+</main>
+<div class="overlay-menu" [ngClass]="{'active': isMenuOpen}"></div>

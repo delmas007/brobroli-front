@@ -1,0 +1,49 @@
+<main class="login-main">
+    <section class="left">
+        <img loading="lazy" src="media/images/login.jpg" alt="">
+    </section>
+    <section data-aos="zoom-in" class="right">
+        <div>
+            <a routerLink="/" routerLinkActive="active" ariaCurrentWhenActive="page"><img class="logo"  src="media/images/Logo.png" alt=""></a>
+        </div>
+        <div  class="middle">
+            <h1>Bienvenue parmi nous!</h1>
+            
+            <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+            <form class="login-form" [formGroup]="formRegister" (ngSubmit)="onRegister()">
+                <div class="form-row">
+                    <div class="w-full px-2">
+                        <label class="font-semibold mb-1" for="email">Nom d'utilisateur</label>
+                        <input type="text" name="username" id="username" placeholder="koffi_masta" formControlName="username">
+                    </div>
+                    <div class="w-full px-2">
+                        <label class="font-semibold mb-1" for="password">Email</label>
+                        <input type="email" name="email" id="email" placeholder="********" formControlName="email">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="w-full px-2">
+                        <label class="font-semibold mb-1" for="email">Mot de passe</label>
+                        <input type="password" name="password" id="password" placeholder="********" formControlName="password">
+                    </div>
+                    <div class="w-full px-2">
+                        <label class="font-semibold mb-1" for="password-confirm">Confirmation</label>
+                        <input type="password" name="password-confirm" id="password-confirm" placeholder="********" formControlName="confirm_password">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="w-full px-2 block">
+                        <label class="font-semibold mb-1" for="user-type">Je suis</label>
+                        <select class="user-type" name="user-type" id="user-type" formControlName="choix" >
+                            <option value="provider">Un prestataire</option>
+                            <option value="customer">Un client</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="btn-link btn-submit" type="submit">S'inscrire</button>
+            </form>
+        </div>
+        <p class="register-text">Déjà inscris ? <a routerLink="/login">connectez vous</a ></p>
+    </section>
+</main>

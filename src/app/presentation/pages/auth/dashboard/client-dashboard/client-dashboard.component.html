@@ -1,0 +1,187 @@
+<main>
+    <div *ngIf="searchOpen" class="dash-search-container">
+        <div class="dash-search-menu">
+            <div class="w-full flex justify-end"><button (click)="searchOpen = !searchOpen" class="close-menu"><span></span></button></div>
+            <hr class="m-1">
+            <form (ngSubmit)="onSearch()" class="search-container">
+                <div class="select-container">
+                    <img src="media/images/travailleur-96.png" alt="" >
+                    <div class="select-objet">
+                        <label for="service">Type de service</label>
+                        <select name="" id="" title="Choisir le type de service">
+                        <option *ngFor="let service of services" [value]="service.value">{{ service.label }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="select-container select2">
+                    <img src="media/images/money-96.png" alt="" >
+                    <div class="select-objet">
+                        <label for="priceRange">Tranche de prix</label>
+                        <select name="" id="" title="Choisir la tranche de prix">
+                            <option *ngFor="let range of priceRanges" [value]="range.value">{{ range.label }}</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit"><img class="icon-search" src="media/images/icon-search.png" alt=""></button>
+            </form>
+        </div>
+    </div>
+
+    <div class="flex">
+        <div class="flex-1 flex flex-col overflow-hidden">
+
+            <div class="modal-overlay" *ngIf="modalPayOpen">
+                <div class="modal-content">
+                    <div class="w-full flex justify-end"><button (click)="modalPayOpen = !modalPayOpen" class="close-menu"><span></span></button></div>
+                    <hr class="my-2">
+                    <h4 class="text-center py-1">Recharger votre solde</h4>
+                    <form  class="flex flex-col gap-2 justify-between" [formGroup]="rechargeForm" (ngSubmit)="rechargeBalance()">
+                        <div class="form-group">
+                            <label for="amount">Montant</label>
+                            <input type="number" class="" id="amount" formControlName="sum">
+                        </div>
+                        <label for="payment-method">Méthode de paiement</label>
+                        <select name="" id="" title="Choisir une méthode de paiement">
+                            <option value="mobile-money">Orange Money</option>
+                            <option value="wave">Wave</option>
+                            <option value="momo">MoMo</option>
+                            <option value="bank-transfer">Moov money</option>
+                        </select>
+                        <button type="submit" class="btn-link w-full flex justify-center">Recharger</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="modal-overlay" *ngIf="modalWithdrawOpen">
+                <div class="modal-content">
+                    <div class="w-full flex justify-end"><button (click)="modalWithdrawOpen = !modalWithdrawOpen" class="close-menu"><span></span></button></div>
+                    <hr class="my-2">
+                    <h4 class="text-center py-1">Retirer votre solde</h4>
+                    <form (ngSubmit)="onWithdrawSubmit()" class="flex flex-col gap-2 justify-between">
+                        <div class="form-group">
+                            <label for="amount">Montant</label>
+                            <input type="text" class="" id="amount">
+                        </div>
+                        <label for="payment-method">Méthode de paiement</label>
+                        <select name="" id="" title="Choisir une méthode de paiement">
+                            <option value="mobile-money">Orange Money</option>
+                            <option value="wave">Wave</option>
+                            <option value="momo">MoMo</option>
+                            <option value="bank-transfer">Moov money</option>
+                        </select>
+                        <button type="submit" class="btn-link w-full flex justify-center">Retirer</button>
+                    </form>
+                </div>
+            </div>
+            <header class="bg-white  flex items-center justify-between p-4">
+                <a routerLink="/" class="flex items-center">
+                    <img class="logo" src="media/images/Logo.png" alt="">
+                </a>
+
+                <div class="flex items-center">
+                    <button (click)="searchOpen = !searchOpen" class="flex items-center text-gray-700 mr-4">
+                        <img loading="lazy" class="bell" src="media/images/search-icon.png" alt="">
+                    </button>
+
+                    <button class="flex items-center text-gray-700 mr-4">
+                        <img loading="lazy" class="bell" src="media/images/notif.png" alt="">
+                    </button>
+
+                    <button (click)="menuOpen = !menuOpen" class="flex items-center text-gray-700">
+                        <img loading="lazy" class="h-12 w-12 rounded-full object-cover" src="media/images/profile-delmas.png" alt="Photo de profil">
+                    </button>
+
+
+                    <div *ngIf="menuOpen" class="dash-profile-menu bg-white rounded-md shadow-lg py-1">
+                        <div class="w-full flex justify-end"><button (click)="menuOpen = !menuOpen" class="close-menu"><span></span></button></div>
+                        <h4 class="text-center py-1">Menu</h4>
+                        <hr>
+                        <a routerLink="/settings" class="flex items-center px-4 py-2 text-base  hover:bg-gray-100"><mat-icon class="w-5 h-5 mr-2 text-[#14C0B7]">settings</mat-icon> Paramètres</a>
+                        <hr>
+                        <a routerLink="/login" class="flex items-center px-4 py-2 text-base  hover:bg-gray-100"><mat-icon class="w-5 h-5 mr-2 text-[#14C0B7]">logout</mat-icon> Déconnexion</a>
+                        <hr>
+                    </div>
+
+
+
+                </div>
+            </header>
+
+            <section class="dash-section-1">
+                <app-dash-slider-card
+                    [slides]="slidesToShow"
+                    [autoSlide]="true"
+                    [parentComponent]="this">
+                </app-dash-slider-card>
+                <div class="card right">
+                    <img class="wallet" src="media/images/wallet.png" alt="">
+                    <p class="text-2xl text-center font-bold"> <span>{{ balance ? balance : 0 }} Fcfa</span></p>
+                    <div class="flex gap-2">
+                        <a (click)="modalPayOpen = !modalPayOpen" class="btn-link w-full flex justify-center">Recharger</a>
+                        <a (click)="modalWithdrawOpen = !modalWithdrawOpen" class="btn-link w-full flex justify-center" >Retirer</a>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <section class="dash-section-2">
+                <div class="card card1">
+                    <div class="flex justify-center items-center">
+                        <h5>Mes projets réalisés</h5>
+                    </div>
+                    <div class="flex justify-center">
+                        <span class="counter">2 </span>
+                    </div>
+                </div>
+                <div class="card card2">
+                    <div class="flex justify-center items-center">
+                        <h5>Nombre de projets réalisés</h5>
+                    </div>
+                    <div class="flex justify-center">
+                        <span class="counter">2 </span>
+                    </div>
+                </div>
+
+
+
+
+            </section>
+
+
+            <section class="dash-section-3">
+                <h2>Projets Récents</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Freelancer</th>
+                            <th>Tâche</th>
+                            <th>Date</th>
+                            <th>Statut</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Delon</td>
+                            <td>Conception site web</td>
+                            <td>15/05/2023</td>
+                            <td><p class="pending"> En cours</p></td>
+                        </tr>
+                        <tr>
+                            <td>Delmas</td>
+                            <td>Maintenance serveur</td>
+                            <td>18/05/2023</td>
+                            <td><p class="done">Terminé</p> </td>
+                        </tr>
+                        <tr>
+                            <td>Delmas</td>
+                            <td>Développement application</td>
+                            <td>20/05/2023</td>
+                            <td><p class="done">Terminé</p></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </div>
+    </div>
+</main>
