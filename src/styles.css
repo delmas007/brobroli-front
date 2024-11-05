@@ -230,7 +230,10 @@ app-admin-accueil{
   width: 100%;
 }
 
-
+canvas{
+  height: auto;
+  width: 100% !important;
+}
 
 
 
