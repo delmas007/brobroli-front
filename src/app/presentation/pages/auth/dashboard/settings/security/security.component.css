@@ -1,0 +1,189 @@
+.box-shadow1{box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;}
+.settings-page{
+  display: flex;
+  height: 100vh;
+}
+aside{
+  width: 20%;
+  min-width: 20%;
+  min-height: 100vh;
+}
+.aside-container{
+  position: fixed;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  padding: 0.5rem;
+  width: 20%;
+
+}
+.settings-aside{
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.settings-aside a{
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  margin: 3rem 1rem;
+  transition: all 0.3s ease-in-out;
+}
+.settings-aside a mat-icon{color: #14C0B7;}
+.settings-aside a:hover{
+  background-color: #14C0B7;
+  border-radius: 17px;
+  color: #fff !important;
+  padding: 0 0.5rem;
+}
+.sections{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin:0.5rem 2rem;
+}
+section{
+  width: 100%;
+  border-bottom: 1px solid #14C0B7;
+}
+.sections h2{
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom:0;
+  color: #14C0B7;
+}
+.username{
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0;
+  padding: 0;
+}
+h5.title-username{
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+}
+.btn-edit{
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #14C0B7;
+  color: #fff;
+  padding: 4px 1rem;
+  border-radius: 17px;
+}
+.btn-edit-responsive{
+  position: absolute;
+  right: 0px;
+  top: 10px;
+  display: none;
+  background-color: #14C0B7;
+  color: #fff;
+  padding: 0.2rem;
+  border-radius: 17px;
+}
+.card-container{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction:column;
+  gap:20px;
+}
+
+.card-profile{
+  width: 100%;
+  max-height: 215px;
+  border-radius: 15px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  padding: 0.2rem;
+}
+.card-top{
+  border-radius: 15px;
+  background: rgb(235,249,248);
+  background: linear-gradient(135deg, rgba(235,249,248,1) 0%, rgba(209,235,233,1) 100%);
+  padding: 0.5rem;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+}
+.card-top.c2{
+  background: rgb(248,242,252);
+  background: linear-gradient(135deg, rgba(248,242,252,1) 0%, rgba(255,247,242,1) 100%);
+}
+.card-top.c3{
+  background: rgb(241,250,253);
+  background: linear-gradient(135deg, rgba(241,250,253,1) 0%, rgba(249,250,233,1) 100%);
+}
+.stars-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  background-color: #fff;
+  padding: 0.2rem 0.5rem;
+}
+.text-titre{
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+img.star{
+  height: 15px;
+  width: auto;
+}
+.saved{
+  border-radius: 100%;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.2rem;
+}
+.work-mode{
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+.work-mode span{
+  margin-right: 0.5rem;
+  padding: 0.1rem 0.6rem;
+  border-radius: 15px;
+  border: 1px solid #000;
+  font-size: 0.8rem;
+
+}
+.card-bottom{
+  padding: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.price{
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+.location{
+  color: #808080;
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 400;
+}
+.card-bottom p{
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+.card-profile-detail{
+  border-radius: 15px;
+  background-color: #000;
+  padding: 0.5rem;
+}
+.card-bottom .btn-link{
+  font-size: 1rem;
+}
+
+
+@media only screen and (max-width: 530px) {
+  .username{font-size: 1.2rem;}
+  h5.title-username{font-size: 1rem;}
+  .btn-edit{display: none;}
+  .btn-edit-responsive{display: flex;}
+}
