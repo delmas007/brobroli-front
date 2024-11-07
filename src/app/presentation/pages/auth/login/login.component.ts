@@ -2,12 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { NavbarComponent } from '@layout/navbar/navbar.component';
-import { User } from '@interfaces/user';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import * as AOS from 'aos';
 import {Login} from "@interfaces/Login";
 import {BrobroliService} from "@services/brobroli.service";
 import {StateService} from "@services/state.service";
+
 
 @Component({
   selector: 'app-login',
@@ -25,6 +25,11 @@ export class LoginComponent implements OnInit {
     password: '',
     rememberMe: false
   };
+
+
+  navigateToResetPassword(): void {
+    this.router.navigate(['/forgot-password']);
+  }
 
 
   constructor(private router: Router,private fb:FormBuilder,private service: BrobroliService,private state:StateService) {
