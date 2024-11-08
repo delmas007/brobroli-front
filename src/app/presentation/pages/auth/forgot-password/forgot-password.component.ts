@@ -1,12 +1,17 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {Router} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
+import {BrobroliService} from "@services/brobroli.service";
+import {StateService} from "@services/state.service";
+import {NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-forgot-password',
   standalone: true,
   imports: [
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgIf,
+    RouterLink
   ],
   templateUrl: './forgot-password.component.html',
   styleUrl: './forgot-password.component.css'
@@ -21,7 +26,7 @@ export class ForgotPasswordComponent implements OnInit{
     this.router.navigate(['/reset-password']);
   }
 
-  constructor(private fb:FormBuilder, private router: Router) {
+  constructor(private fb:FormBuilder, private router: Router,private service:BrobroliService,private state: StateService) {
   }
 
   ngOnInit(): void {
@@ -38,22 +43,25 @@ export class ForgotPasswordComponent implements OnInit{
       this.errorMessage = "Veuillez corriger les erreurs dans le formulaire.";
       return;
     }
-    /*this.apiService.codeMotDePasse(email)
-      .then((token: any) => {
-        this.router.navigateByUrl(`/modifier-mot-de-passe/${email}`);
-      })
-      .catch((err: any)=> {
+    this.service.envoyerCodeReinitialisation(email).subscribe({
+      next:(value:any)=>{
+        localStorage.setItem("email",email);
+        this.router.navigate(['/reset-password'])
+      },
+      error:(err:any)=>{
         if (err.error && err.error.message) {
           this.errorMessage = err.error.message;
+          this.loading = false;
         } else {
           this.loading = false;
           console.log(err);
           this.errorMessage = 'Erreur temporaire du serveur. Veuillez réessayer plus tard.';
         }
-      })
-      .finally(() => {
+      },
+      complete:()=>{
         this.loading = false;
-      });*/
+      }
+    })
   }
 
 }

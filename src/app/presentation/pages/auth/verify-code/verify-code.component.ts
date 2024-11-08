@@ -2,12 +2,17 @@ import {Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute, Router} from "@angular/router";
 import {FormsModule} from "@angular/forms";
+import {BrobroliService} from "@services/brobroli.service";
+import {StateService} from "@services/state.service";
+import {response} from "express";
+import {NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-verify-code',
   standalone: true,
   imports: [
-    FormsModule
+    FormsModule,
+    NgIf
   ],
   templateUrl: './verify-code.component.html',
   styleUrl: './verify-code.component.css'
@@ -16,58 +21,60 @@ export class VerifyCodeComponent implements OnInit {
   digits: string[] = new Array(6).fill('');
   isError: boolean = false;
   resendDisabled: boolean = false;
-  countdownTimer: number = 3; // Temps en secondes
-  email!: string ;
+  countdownTimer: number = 3;
+  email!: string | null ;
   code: string[] = ['', '', '', '', '', ''];
 
-  constructor(private http: HttpClient, private router: Router, private activatedRoute: ActivatedRoute) {}
+  constructor(private http: HttpClient, private router: Router, private activatedRoute: ActivatedRoute,private service:BrobroliService,private state:StateService) {}
 
   ngOnInit() {
     this.startCountdown();
   }
 
   startCountdown() {
-    this.resendDisabled = true; // Désactive le lien de renvoi
+    this.resendDisabled = true;
     const interval = setInterval(() => {
       this.countdownTimer--;
       if (this.countdownTimer <= 0) {
         clearInterval(interval);
-        this.resendDisabled = false; // Active à nouveau le lien de renvoi
-        this.countdownTimer = 30; // Réinitialise le compte à rebours
+        this.resendDisabled = false;
+        this.countdownTimer = 30;
       }
-    }, 1000); // 1000 ms = 1 seconde
+    }, 1000);
   }
 
   verifyCode() {
     const code = this.code.join('');
-   /* this.apiService.Verification(code)
-      .then((response: any) => {
-        this.router.navigateByUrl("/connexion");
-      })
-      .catch(error => {
-        this.isError = true;
-        const inputs = document.querySelectorAll('.code-inputs input');
-        inputs.forEach(input => input.classList.add('shake'));
+   this.service.activationCompte(code).subscribe({
+     next:(value:any)=>{
+       this.router.navigateByUrl("/login");
+     },
+     error:(error:any)=>{
+       this.isError = true;
+       const inputs = document.querySelectorAll('.code-inputs input');
+       inputs.forEach(input => input.classList.add('shake'));
 
-        setTimeout(() => {
-          this.isError = false;
-          inputs.forEach(input => input.classList.remove('shake'));
-        }, 1000);
-      }); */
+       setTimeout(() => {
+         this.isError = false;
+         inputs.forEach(input => input.classList.remove('shake'));
+       }, 1000);
+     }
+   })
   }
 
   resendCode() {
     this.countdownTimer = 30;
     this.startCountdown();
-    this.email = this.activatedRoute.snapshot.params['email']
-
-    // Appel à votre service HTTP pour renvoyer le code
-    /*this.apiService.resendMail(this.email).then((response: any) => {
+    this.email = localStorage.getItem("email");
+    // @ts-ignore
+    this.service.renvoyerMail(this.email).subscribe({
+      next:(response:any)=>{
       console.log('Code renvoyé avec succès', response)
-    })
-      .catch(error => {
+    },
+      error:(error:any)=>{
         console.log('Erreur lors de l\'envoi du code', error)
-      });*/
+      }
+    })
   }
 
   onResendClick(event: Event) {

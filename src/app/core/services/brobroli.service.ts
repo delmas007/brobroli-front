@@ -7,6 +7,7 @@ import {Balance} from "../../domains/interfaces/balance";
 import {Service} from "../../domains/interfaces/Service";
 import {Skills} from "../../domains/interfaces/Skills";
 import {BalanceSum} from "../../domains/interfaces/balanceSum";
+import {UpdatePasswordDTO} from "@interfaces/UpdatePasswordDTO";
 @Injectable({
   providedIn: 'root'
 })
@@ -76,5 +77,18 @@ export class BrobroliService {
   }
   annulerCollaboration(id:number): Observable<any> {
     return this.http.put<any>(`${this.host}/customers/collaboration/annuler/${id}`, {});
+  }
+  activationCompte(code:string): Observable<any>{
+    return this.http.post<any>(`${this.host}/validation/active-account/${code}`,{})
+  }
+  renvoyerMail(mail:string): Observable<any>{
+    return this.http.post<any>(`${this.host}/validation/resend-mail/${mail}`,{})
+  }
+  envoyerCodeReinitialisation(mail:string): Observable<any>{
+    return this.http.post<any>(`${this.host}/validation/send-code-reset-password/${mail}`,{})
+  }
+  nouveauMotDePasse(password:any): Observable<any>{
+    console.log(password)
+    return this.http.post<any>(`${this.host}/validation/nouveau-mot-de-passe`,password)
   }
 }

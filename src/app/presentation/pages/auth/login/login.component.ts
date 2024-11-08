@@ -20,6 +20,7 @@ import {StateService} from "@services/state.service";
 export class LoginComponent implements OnInit {
   errorMessage: any;
   formLogin!: FormGroup;
+  loading = false;
   user: Login = {
     userName: '',
     password: '',
@@ -48,24 +49,33 @@ export class LoginComponent implements OnInit {
     this.user.userName = this.formLogin.value.username;
     this.user.password = this.formLogin.value.password;
     this.errorMessage = null;
+    this.loading = true;
     if (this.formLogin.invalid) {
       this.errorMessage = "Veuillez corriger les erreurs dans le formulaire.";
+      this.loading = false;
       return;
     }
-    this.service.login(this.user).subscribe(
-      data => {
+    this.service.login(this.user).subscribe({
+      next:(data: any)=>{
         localStorage.setItem('token', data.id_token);
         this.state.loadToken();
         if (this.state.authState.role === 'SCOPE_CUSTOMER') {
+          this.loading = false;
           this.router.navigate(['/dashboard-client']);
         }
         if (this.state.authState.role === 'SCOPE_PROVIDER') {
+          this.loading = false;
           this.router.navigate(['/dashboard-prestataire']);
         }
       },
-      error => {
-        this.errorMessage = error.error.message;
+      error:(err:any)=>{
+        console.log(err)
+        this.loading = false;
+        this.errorMessage = err.error.message;
+    },
+      complete:()=>{
+        this.loading = false;
       }
-    );
+    });
 }
   }

@@ -8,7 +8,7 @@
         </div>
         <div  class="middle">
             <h1>Bienvenue parmi nous!</h1>
-            
+
             <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
 
             <form class="login-form" [formGroup]="formRegister" (ngSubmit)="onRegister()">
@@ -19,7 +19,7 @@
                     </div>
                     <div class="w-full px-2">
                         <label class="font-semibold mb-1" for="password">Email</label>
-                        <input type="email" name="email" id="email" placeholder="********" formControlName="email">
+                        <input type="email" name="email" id="email" placeholder="delmas@gmail.com" formControlName="email">
                     </div>
                 </div>
                 <div class="form-row">
