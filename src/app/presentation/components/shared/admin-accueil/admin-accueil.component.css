@@ -12,9 +12,14 @@
   width: 60%;
   background: rgb(35,38,44);
   background: linear-gradient(90deg, rgba(35,38,44,1) 0%, rgba(26,37,36,1) 100%);
+  display: flex;
+  justify-content: center;
 }
 
 .card-lg-2{
   width: 100%;
   background-color: #f8fefe;
+}
+.card.list{
+  width: 100%;
 }
