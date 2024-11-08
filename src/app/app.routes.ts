@@ -25,6 +25,9 @@ import {WalletComponent} from "@auth/dashboard/settings/wallet/wallet.component"
 import {NotificationComponent} from "@auth/dashboard/settings/notification/notification.component";
 import {SecurityComponent} from "@auth/dashboard/settings/security/security.component";
 import {SidebarComponent} from "@auth/dashboard/settings/sidebar/sidebar.component";
+import {ForgotPasswordComponent} from "@auth/forgot-password/forgot-password.component";
+import {ResetPassawordComponent} from "@auth/reset-passaword/reset-passaword.component";
+import {VerifyCodeComponent} from "@auth/verify-code/verify-code.component";
 export const routes: Routes = [
 
     { path: '', component: HomeComponent },
