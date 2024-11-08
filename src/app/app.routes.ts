@@ -29,6 +29,9 @@ export const routes: Routes = [
 
     { path: '', component: HomeComponent },
     { path: 'login', component: LoginComponent },
+    { path: 'forgot-password', component: ForgotPasswordComponent },
+    { path: 'reset-password', component: ResetPassawordComponent},
+    { path: 'verify-code', component:  VerifyCodeComponent},
     { path: 'add-service', component: ServicesPageComponent },
     { path: 'dashboard-client', component: ClientDashboardComponent},
     { path: 'dashboard-prestataire', component: PrestataireDashboardComponent},
