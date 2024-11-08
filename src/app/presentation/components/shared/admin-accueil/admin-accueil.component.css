@@ -58,8 +58,15 @@ span.backg{
   border-radius: 15px;
   padding: 0.5rem;
 }
+
 .card-users-container{
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.card-users img{
+  width: 180px;
+  height: auto;
 }
 .section-card-1{
   display: flex;
