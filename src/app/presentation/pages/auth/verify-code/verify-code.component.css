@@ -1,0 +1,167 @@
+/* Style global du container */
+.container {
+  background-color: #a4f9ff;
+  padding: 40px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 400px;
+  margin: 30px auto;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  font-family: Arial, sans-serif;
+  display: flex; /* Utilisation de flexbox pour centrer */
+  flex-direction: column; /* Disposition en colonne */
+  justify-content: center; /* Centrage vertical */
+}
+
+/* Stylisation du titre */
+h2 {
+  color: #14C0B7; /* Couleur verte */
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+
+
+/* Stylisation du texte de paragraphe */
+p {
+  color: #333;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+/* Style des champs de saisie */
+.code-inputs {
+  display: flex; /* Alignement des champs sur une seule ligne */
+  justify-content: center; /* Centrage horizontal des champs */
+  gap: 10px; /* Espacement entre les champs */
+  margin-bottom: 20px;
+}
+
+.code-inputs input {
+  width: 50px;
+  height: 50px;
+  font-size: 22px;
+  text-align: center;
+  border-radius: 8px;
+  border: 2px solid #14C0B7;
+  outline: none;
+  transition: border 0.3s ease;
+}
+
+/* Bordure rouge en cas d'erreur */
+.code-inputs input.error {
+  border-color: #E53935;
+}
+
+/* Transition de bordure au focus */
+.code-inputs input:focus {
+  border-color: #0f9b8e;
+  box-shadow: 0 0 10px rgba(20, 192, 183, 0.6);
+}
+
+/* Style pour les liens */
+a {
+  color: #14C0B7;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #0f9b8e;
+  text-decoration: underline;
+}
+
+/* Ajout d'animation pour les erreurs */
+.error {
+  border-color: red;
+  outline: none;
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
+
+.shake {
+  animation: shake 0.4s ease-in-out;
+}
+
+/* Style du bouton */
+button {
+  background-color: #14C0B7;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 30px;
+  font-size: 16px;
+  font-weight: 600;
+  width: 100%;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background-color: #0f9b8e;
+  transform: scale(1.05);
+}
+
+button:disabled {
+  background-color: #c1c1c1;
+  cursor: not-allowed;
+}
+
+/* Section d'erreur pour le message d'erreur */
+.alert {
+  color: #fff;
+  background-color: #E53935;
+  border-radius: 8px;
+  padding: 10px;
+  margin-top: 20px;
+}
+
+/* Ajout de l'alignement et de l'espacement du lien retour */
+p a {
+  font-size: 14px;
+  margin-top: 15px;
+}
+
+/* Optimisation du formulaire */
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Adaptation du style en fonction de l'écran */
+@media (max-width: 768px) {
+  .container {
+    padding: 20px;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+
+  p {
+    font-size: 13px;
+  }
+
+  .code-inputs input {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+
+  button {
+    font-size: 14px;
+  }
+}

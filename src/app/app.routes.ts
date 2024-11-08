@@ -19,10 +19,16 @@ import { AdminAccueilComponent } from './presentation/components/shared/admin-ac
 import { AdminCustomersComponent } from './presentation/components/shared/admin-customers/admin-customers.component';
 import { AdminProvidersComponent } from './presentation/components/shared/admin-providers/admin-providers.component';
 import { AdminSettingsComponent } from './presentation/components/shared/admin-settings/admin-settings.component';
+import {ForgotPasswordComponent} from "@auth/forgot-password/forgot-password.component";
+import {ResetPassawordComponent} from "@auth/reset-passaword/reset-passaword.component";
+import {VerifyCodeComponent} from "@auth/verify-code/verify-code.component";
 export const routes: Routes = [
 
     { path: '', component: HomeComponent },
     { path: 'login', component: LoginComponent },
+    { path: 'forgot-password', component: ForgotPasswordComponent },
+    { path: 'reset-password', component: ResetPassawordComponent},
+    { path: 'verify-code', component:  VerifyCodeComponent},
     { path: 'add-service', component: ServicesPageComponent },
     { path: 'dashboard-client', component: ClientDashboardComponent},
     { path: 'dashboard-prestataire', component: PrestataireDashboardComponent},
