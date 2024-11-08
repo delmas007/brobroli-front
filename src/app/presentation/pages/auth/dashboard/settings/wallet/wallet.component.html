@@ -1,0 +1,44 @@
+<section class="min-h-screen" id="portefeuille">
+  <h2>Mon portefeuille</h2>
+  <p class="text-gray-600 font-medium">Consultez et gérez vos transactions financières.</p>
+  <main class="h-2/3 bg-white box-shadow1 rounded-2xl p-6 mb-6">
+    <div class="mb-6">
+      <div class="flex justify-between items-center relative">
+        <span class="text-lg font-medium text-gray-800 mb-4">Paramétrage Portefeuille </span>
+        <button class="btn-edit">Modifier <mat-icon class="text-lg">edit</mat-icon></button>
+        <button class="btn-edit-responsive"><mat-icon class="text-base">edit</mat-icon></button>
+      </div>
+      <div class="flex flex-col gap-4">
+        <div class="flex flex-col md:flex-row gap-4">
+          <div class="flex-1">
+            <label for="mobile-money-number" class="block text-sm font-medium text-gray-700">Numéro Mobile Money</label>
+            <input type="text" id="mobile-money-number" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-sm" placeholder="Entrez votre numéro Mobile Money">
+          </div>
+          <div class="flex-1">
+            <label for="mobile-money-provider" class="block text-sm font-medium text-gray-700">Fournisseur Mobile Money</label>
+            <select id="mobile-money-provider" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-sm">
+              <option value="orange-money">Orange Money</option>
+              <option value="wave">Wave</option>
+              <option value="momo">MoMo</option>
+              <option value="moov-money">Moov Money</option>
+            </select>
+          </div>
+        </div>
+        <div class="flex flex-col md:flex-row gap-4">
+          <div class="flex-1">
+            <label for="amount" class="block text-sm font-medium text-gray-700">Montant</label>
+            <input type="text" id="amount" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-sm" placeholder="Entrez le montant">
+          </div>
+          <div class="flex-1">
+            <label for="transaction-type" class="block text-sm font-medium text-gray-700">Type de Transaction</label>
+            <select id="transaction-type" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-sm">
+              <option value="recharge">Recharger</option>
+              <option value="withdraw">Retirer</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit" class="btn-link w-full flex justify-center mt-4">Soumettre</button>
+      </div>
+    </div>
+  </main>
+</section>

@@ -1,0 +1,105 @@
+<div class="sections">
+<section id="profile">
+  <h2 class="m-0">Mon profil</h2>
+  <hr>
+  <p class="text-gray-600 font-medium">Gérez vos informations personnelles et vos préférences de profil.</p>
+  <div class=" font-sans">
+    <div class="container mx-auto min-h-screen max-w-5xl">
+
+      <header class="bg-white box-shadow1 rounded-xl p-6 mb-6">
+        <div class="relative flex justify-between items-center flex-wrap">
+          <div class="flex justify-start items-center mb-2">
+            <img class="w-24 h-auto mr-5 rounded-full" [src]="currentUser?.urlProfil" alt="Photo de profil">
+            <div>
+              <h3 class="username">{{ currentUser?.firstName }} {{ currentUser?.lastName }}</h3>
+              <h5 class="title-username">{{ currentUser?.biographie }}</h5>
+            </div>
+          </div>
+          <button class="btn-edit">Modifier <mat-icon class="text-lg">edit</mat-icon></button>
+          <button class="btn-edit-responsive"><mat-icon class="text-base">edit</mat-icon></button>
+        </div>
+        <div class="flex flex-wrap gap-4 text-sm mt-1 text-gray-600">
+          <p>📧 {{ currentUser?.email }}</p>
+          <p>📱 {{ currentUser?.tel }}</p>
+          <p>📍 {{ currentUser?.city }}, {{ currentUser?.street }}</p>
+        </div>
+      </header>
+
+      <main *ngIf="isProvider" class="bg-white box-shadow1 rounded-2xl p-6 mb-6">
+        <div class="mb-6">
+          <div class="flex justify-between items-center relative">
+            <span class="text-4xl font-bold text-gray-800">Résumé</span>
+            <button class="btn-edit">Modifier <mat-icon class="text-lg">edit</mat-icon></button>
+            <button class="btn-edit-responsive"><mat-icon class="text-base">edit</mat-icon></button>
+          </div>
+          <p class="text-gray-600 mt-3">Développeur fullstack passionné avec 5 ans d'expérience dans la création d'applications web robustes et évolutives. Expertise en JavaScript, React, Node.js et bases de données SQL/NoSQL.</p>
+        </div>
+      </main>
+
+      <main *ngIf="isProvider" class="bg-white box-shadow1 rounded-2xl p-6 mb-6">
+        <div class="mb-6">
+          <div class="flex justify-between items-center relative">
+            <span class="text-4xl  font-bold  text-gray-800">Expérience Professionnelle</span>
+            <button class="btn-edit">Modifier <mat-icon class="text-lg">edit</mat-icon></button>
+            <button class="btn-edit-responsive"><mat-icon class="text-base">edit</mat-icon></button>
+          </div>
+          <div class="mb-4 mt-3">
+            <span class="text-xl font-medium text-gray-800">Développeur Fullstack Senior - TechCorp </span>
+            <p class="text-sm text-gray-600">Janvier 2020 - Présent </p>
+            <ul class="list-disc list-inside text-gray-600 mt-2">
+              <li>Développement et maintenance d'applications web à grande échelle </li>
+              <li>Mise en place d'architectures microservices avec Docker et Kubernetes </li>
+              <li>Mentorat des développeurs juniors et revue de code </li>
+            </ul>
+          </div>
+          <div>
+            <span class="text-xl font-medium text-gray-800">Développeur Frontend - WebSolutions </span>
+            <p class="text-sm text-gray-600">Juin 2018 - Décembre 2019 </p>
+            <ul class="list-disc list-inside text-gray-600 mt-2">
+              <li>Création d'interfaces utilisateur réactives avec React et Redux </li>
+              <li>Optimisation des performances front-end et amélioration de l'expérience utilisateur </li>
+            </ul>
+          </div>
+        </div>
+      </main>
+
+      <main *ngIf="isProvider" class="bg-white box-shadow1 rounded-2xl p-6 mb-6">
+        <div class="mb-6">
+          <div class="flex justify-between items-center relative">
+            <span class="text-4xl font-bold text-gray-800 mb-3 flex items-center gap-2">Compétences</span>
+            <button class="btn-edit">Modifier <mat-icon class="text-lg">edit</mat-icon></button>
+            <button class="btn-edit-responsive"><mat-icon class="text-base">edit</mat-icon></button>
+          </div>
+          <ul class="flex flex-wrap gap-2">
+            <li class="bg-gray-200 px-3 py-1 rounded-full text-sm text-gray-700">JavaScript</li>
+            <li class="bg-gray-200 px-3 py-1 rounded-full text-sm text-gray-700">TypeScript</li>
+            <li class="bg-gray-200 px-3 py-1 rounded-full text-sm text-gray-700">React</li>
+            <li class="bg-gray-200 px-3 py-1 rounded-full text-sm text-gray-700">Node.js</li>
+            <li class="bg-gray-200 px-3 py-1 rounded-full text-sm text-gray-700">Express</li>
+            <li class="bg-gray-200 px-3 py-1 rounded-full text-sm text-gray-700">MongoDB</li>
+            <li class="bg-gray-200 px-3 py-1 rounded-full text-sm text-gray-700">PostgreSQL</li>
+            <li class="bg-gray-200 px-3 py-1 rounded-full text-sm text-gray-700">Docker</li>
+            <li class="bg-gray-200 px-3 py-1 rounded-full text-sm text-gray-700">Git</li>
+          </ul>
+        </div>
+      </main>
+
+      <main *ngIf="isProvider" class="bg-white box-shadow1 rounded-2xl p-6 mb-6">
+        <div class="mb-6">
+          <div class="flex justify-between items-center relative">
+            <span class="text-4xl font-bold text-gray-800 mb-3">Formation</span>
+            <button class="btn-edit">Modifier <mat-icon class="text-lg">edit</mat-icon></button>
+            <button class="btn-edit-responsive"><mat-icon class="text-base">edit</mat-icon></button>
+          </div>
+          <div>
+            <span class="text-lg font-medium text-gray-800">Master en Informatique </span>
+            <p class="text-sm text-gray-600">Université de Paris - 2018 </p>
+          </div>
+        </div>
+      </main>
+
+
+    </div>
+  </div>
+</section>
+</div>
