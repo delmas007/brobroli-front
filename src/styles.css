@@ -231,8 +231,8 @@ app-admin-accueil{
 }
 
 canvas{
-  height: auto;
-  width: 100% !important;
+  height: 250px !important;
+  width: 250px !important;
 }
 
 
