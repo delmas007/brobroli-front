@@ -1,24 +1,52 @@
 <main class="w-full h-dvh p-4">
   <section class="flex items-center justify-between">
-    <h4>Bonjour, Admin</h4>
+    <p class="text-3xl font-bold ">Bonjour, Admin</p>
     <div>
       <div></div>
       <button></button>
     </div>
   </section>
 
-  <section class="flex gap-3">
+  <section class="section-card-1 flex gap-3">
     <div class="card card-lg">
-      <div class="flex"><h3 class="m-0">Utilisateur</h3></div>
+      <div class="flex"><p class="m-0 text-xl font-semibold">Utilisateur</p></div>
+      <div class="card-users-container">
+        <div class="card-users">
+          <img class="w-32" src="media/images/freelancer2.png" alt="">
+          <div class="">
+            <p class="font-bold text-xl">Prestataire</p>
+            <p class="font-semibold">29</p>
+          </div>
+        </div>
+        <div class="card-users">
+          <img  class="w-32" src="media/images/freelancer3.png" alt="">
+          <div class="">
+            <p class="font-bold text-xl">Client</p>
+            <p class="font-semibold">9</p>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="card card-m"><p-chart type="doughnut" [data]="data" [options]="options" />
     </div>
   </section>
 
   <section class="flex mt-4 gap-3">
-    <div class="w-1/2">
-      <div class="card card-lg-2 mb-2"></div>
-      <div class="card card-lg-2 mt-2"></div>
+    <div class="w-1/2 flex flex-col justify-between">
+      <a routerLink="/projects" class="card-lg-1">
+        <img class="card-image" loading="lazy" src="media/images/project.png" alt="">
+        <div>
+          <p class="font-bold">Service a valider</p>
+          <span class="backg">250</span>
+        </div>
+      </a>
+      <a routerLink="/projects" class="card-lg-2">
+        <img class="card-image" loading="lazy" src="media/images/project.png" alt="">
+        <div>
+          <p class="font-bold">Collaboration réussie</p>
+          <span class="backg">0</span>
+        </div>
+      </a>
     </div>
       <div class="card list">
         <p-table [value]="users">

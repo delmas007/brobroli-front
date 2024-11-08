@@ -16,10 +16,70 @@
   justify-content: center;
 }
 
+.card-lg-1{
+  background: rgb(255, 243, 243);
+  background: linear-gradient(135deg, rgba(255, 243, 243, 1) 0%, rgba(255, 231, 231, 1) 100%);
+  border-radius: 15px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+span.backg{
+  display: flex;
+  justify-content: center;
+  background-color: #fff;
+  border-radius: 15px;
+  padding: 0.5rem;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  text-align: center;
+  width: 100%;
+  font-weight: 700;
+}
 .card-lg-2{
   width: 100%;
-  background-color: #f8fefe;
+  background: rgb(255, 255, 250);
+  background: linear-gradient(135deg, rgba(255, 255, 250, 1) 0%, rgba(255, 255, 237, 1) 100%);
+  border-radius: 15px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
 }
 .card.list{
   width: 100%;
+}
+.card-users{
+  display: flex;
+  border-radius: 15px;
+  padding: 0.5rem;
+}
+.card-users-container{
+  display: flex;
+}
+.section-card-1{
+  display: flex;
+  gap: 0.5rem;
+}
+
+.card-image{
+  height: 70px;
+  width: auto;
+}
+.card.card1{
+  background: rgb(255,243,243);
+  background: linear-gradient(135deg, rgba(255,243,243,1) 0%, rgba(255,231,231,1) 100%);
+}
+@media only screen and (max-width: 960px) {
+  .card-users-container{flex-wrap: wrap;}
+}
+
+@media only screen and (max-width: 768px) {
+  .section-card-1{flex-wrap: wrap;}
+  .card-m{width: 100%;}
+
 }
