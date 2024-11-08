@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, RouterLink, RouterOutlet} from "@angular/router";
+import {ActivatedRoute, RouterModule, RouterOutlet} from "@angular/router";
 import {MatIcon} from "@angular/material/icon";
 import {Person} from "@interfaces/person";
 import {User} from "@interfaces/user";
@@ -10,7 +10,7 @@ import {NgIf} from "@angular/common";
   selector: 'app-sidebar',
   standalone: true,
   imports: [
-    RouterLink,
+    RouterModule,
     MatIcon,
     RouterOutlet,
     NgIf
