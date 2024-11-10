@@ -43,7 +43,6 @@ aside{
 }
 section{
   width: 100%;
-  border-bottom: 1px solid #14C0B7;
 }
 .sections h2{
   font-size: 2rem;
@@ -85,11 +84,9 @@ h5.title-username{
 .card-container{
   width: 100%;
   height: 100%;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  justify-items: center;
-  grid-gap: 15px;
-
+  display: flex;
+  flex-direction:column;
+  gap:20px;
 }
 
 .card-profile{

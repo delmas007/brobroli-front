@@ -19,16 +19,38 @@ import { AdminAccueilComponent } from './presentation/components/shared/admin-ac
 import { AdminCustomersComponent } from './presentation/components/shared/admin-customers/admin-customers.component';
 import { AdminProvidersComponent } from './presentation/components/shared/admin-providers/admin-providers.component';
 import { AdminSettingsComponent } from './presentation/components/shared/admin-settings/admin-settings.component';
+import {ProfileComponent} from "@auth/dashboard/settings/profile/profile.component";
+import {ServiceComponent} from "@auth/dashboard/settings/service/service.component";
+import {WalletComponent} from "@auth/dashboard/settings/wallet/wallet.component";
+import {NotificationComponent} from "@auth/dashboard/settings/notification/notification.component";
+import {SecurityComponent} from "@auth/dashboard/settings/security/security.component";
+import {SidebarComponent} from "@auth/dashboard/settings/sidebar/sidebar.component";
+import {ForgotPasswordComponent} from "@auth/forgot-password/forgot-password.component";
+import {ResetPassawordComponent} from "@auth/reset-passaword/reset-passaword.component";
+import {VerifyCodeComponent} from "@auth/verify-code/verify-code.component";
 import { AdminValidateComponent } from './presentation/components/shared/admin-validate/admin-validate.component';
 export const routes: Routes = [
 
     { path: '', component: HomeComponent },
     { path: 'login', component: LoginComponent },
+    { path: 'forgot-password', component: ForgotPasswordComponent },
+    { path: 'reset-password', component: ResetPassawordComponent},
+    { path: 'verify-code', component:  VerifyCodeComponent},
     { path: 'add-service', component: ServicesPageComponent },
     { path: 'dashboard-client', component: ClientDashboardComponent},
     { path: 'dashboard-prestataire', component: PrestataireDashboardComponent},
     { path: 'register', component: RegisterComponent },
     { path: 'settings', component: SettingsComponent },
+    { path: 'sidebar', component: SidebarComponent,
+      children:[
+        { path: 'profiles', component: ProfileComponent },
+        { path: 'servises', component: ServiceComponent },
+        { path: 'wallet', component: WalletComponent },
+        { path: 'notifications', component: NotificationComponent },
+        { path: 'security', component: SecurityComponent },
+      ]
+    },
+
     { path: 'search/:typeService/:minPrice/:maxPrice', component: SearchComponent },
     { path: 'final-registration', component: FinalRegistrationComponent },
     { path: 'profile', component: CollabProfileComponent },

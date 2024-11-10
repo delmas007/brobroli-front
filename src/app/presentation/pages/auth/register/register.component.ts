@@ -7,6 +7,7 @@ import { User } from '@interfaces/user';
 import {Inscription} from "@interfaces/Inscription";
 import {BrobroliService} from "@services/brobroli.service";
 import {of} from "rxjs";
+import {StateService} from "@services/state.service";
 @Component({
   selector: 'app-register',
   standalone: true,
@@ -17,6 +18,7 @@ import {of} from "rxjs";
 export class RegisterComponent implements OnInit {
   errorMessage: any;
   formRegister!: FormGroup;
+  loading = false;
   donnee:Inscription = {
     email: "",
     user: {
@@ -26,7 +28,7 @@ export class RegisterComponent implements OnInit {
   }
 
 
-  constructor(private router: Router,private fb:FormBuilder,private service: BrobroliService) {
+  constructor(private router: Router,private fb:FormBuilder,private service: BrobroliService,private state:StateService) {
   }
 
   ngOnInit(): void {
@@ -41,27 +43,33 @@ export class RegisterComponent implements OnInit {
   }
 
   onRegister() {
+    this.loading = true;
     this.donnee.user.userName = this.formRegister.value.username;
     this.donnee.user.password = this.formRegister.value.password;
     this.donnee.email = this.formRegister.value.email;
     this.errorMessage = null;
     if (this.formRegister.invalid) {
       this.errorMessage = "Veuillez corriger les erreurs dans le formulaire.";
+      this.loading = false;
       return;
     }
     if (this.formRegister.value.password !== this.formRegister.value.confirm_password) {
       this.errorMessage = "Les mots de passe ne correspondent pas.";
+      this.loading = false;
       return;
     }
     if (this.formRegister.value.choix === "customer") {
       this.service.inscriptionCustomer(this.donnee).subscribe(
         data => {
           console.log(data);
-          this.router.navigate(['/login']);
+          localStorage.setItem("email",this.donnee.email)
+          this.loading = false;
+          this.router.navigate(['/verify-code']);
         },
         error => {
           console.log(error);
           this.errorMessage = error.error.message;
+          this.loading = false;
         }
       );
     }
@@ -69,10 +77,13 @@ export class RegisterComponent implements OnInit {
       this.service.inscriptionProvider(this.donnee).subscribe(
         data => {
           console.log(data);
-          this.router.navigate(['/login']);
+          this.loading = false;
+          localStorage.setItem("email",this.donnee.email)
+          this.router.navigate(['/verify-code']);
         },
         error => {
           console.log(error);
+          this.loading = false;
           this.errorMessage = error.error.message;
         }
       );

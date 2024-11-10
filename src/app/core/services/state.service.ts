@@ -12,6 +12,7 @@ export class StateService {
     username : undefined,
     role : undefined,
     token: undefined,
+    mail: undefined
   }
 
   constructor() {

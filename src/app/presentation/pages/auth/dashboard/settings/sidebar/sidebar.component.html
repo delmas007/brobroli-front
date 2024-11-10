@@ -1,0 +1,26 @@
+<main class="settings-page">
+  <aside >
+    <div class="aside-container">
+      <h5 class="text-[#14C0B7]">Paramètres</h5>
+      <hr>
+      <div class="settings-aside">
+        <div class="">
+          <a routerLink="/sidebar/profiles"  routerLinkActive="current"><mat-icon>person</mat-icon>Mon profil</a>
+          <a *ngIf="isProvider" routerLink="/sidebar/servises" routerLinkActive="current"><mat-icon>work</mat-icon>Mes services</a>
+          <a routerLink="/sidebar/wallet" routerLinkActive="current"><mat-icon>account_balance_wallet</mat-icon>Mon Portefeuille</a>
+          <a routerLink="/sidebar/notifications" routerLinkActive="current"><mat-icon>notifications</mat-icon>Notifications</a>
+          <a routerLink="/sidebar/security" routerLinkActive="current"><mat-icon>security</mat-icon>Sécurité</a>
+        </div>
+        <div class="">
+          <a [routerLink]="isProvider ? '/dashboard-prestataire' : '/dashboard-client'">
+            <mat-icon>dashboard</mat-icon>Dashboard
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </aside>
+  <div class="w-full" >
+    <router-outlet></router-outlet>
+  </div>
+</main>

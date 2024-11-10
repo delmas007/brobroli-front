@@ -37,6 +37,7 @@ aside{
   padding: 0 0.5rem;
 }
 .sections{
+  width: 100%;
   display: flex;
   flex-direction: column;
   margin:0.5rem 2rem;
@@ -44,6 +45,7 @@ aside{
 section{
   width: 100%;
   border-bottom: 1px solid #14C0B7;
+  padding:2rem;
 }
 .sections h2{
   font-size: 2rem;

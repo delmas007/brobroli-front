@@ -26,12 +26,17 @@
                         <input type="checkbox" name="remember" id="remember" formControlName="rememberMe">
                         <label for="remember">Se souvenir de moi</label>
                     </div>
-                    <a class="text-forget-mdp" href="http://">Mot de passe oublié</a>
+                    <a class="text-forget-mdp" (click)="navigateToResetPassword()">Mot de passe oublié</a>
                 </div>
 
-                <button class="btn-link btn-submit" type="submit">Se connecter</button>
+                <button class="btn-link btn-submit" type="submit">
+                  <span *ngIf="!loading">Se connecter</span>
+                  <span *ngIf="loading">Connexion en cours...<i class="pi pi-spin pi-spinner"></i></span>
+                 <!-- <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  {{ loading ? 'Envoi en cours...' : 'Se connecter' }}-->
+                </button>
             </form>
         </div>
-        <p class="register-text">Vous n'êtes pas encore inscrit ? <a routerLink="/register">Inscrivez-vous</a></p>
+        <p class="register-text">Vous n'êtes pas encore inscrit ? <a routerLink="/register" >Inscrivez-vous</a></p>
     </section>
 </main>

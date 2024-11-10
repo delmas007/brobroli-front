@@ -37,9 +37,8 @@ aside{
   padding: 0 0.5rem;
 }
 .sections{
-  display: flex;
-  flex-direction: column;
   margin:0.5rem 2rem;
+  gap:15px;
 }
 section{
   width: 100%;
@@ -85,11 +84,9 @@ h5.title-username{
 .card-container{
   width: 100%;
   height: 100%;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  justify-items: center;
-  grid-gap: 15px;
-
+  display: flex;
+  flex-direction:column;
+  gap:20px;
 }
 
 .card-profile{
@@ -188,3 +185,5 @@ img.star{
   .btn-edit{display: none;}
   .btn-edit-responsive{display: flex;}
 }
+
+
