@@ -19,6 +19,7 @@ import { AdminAccueilComponent } from './presentation/components/shared/admin-ac
 import { AdminCustomersComponent } from './presentation/components/shared/admin-customers/admin-customers.component';
 import { AdminProvidersComponent } from './presentation/components/shared/admin-providers/admin-providers.component';
 import { AdminSettingsComponent } from './presentation/components/shared/admin-settings/admin-settings.component';
+import { AdminValidateComponent } from './presentation/components/shared/admin-validate/admin-validate.component';
 export const routes: Routes = [
 
     { path: '', component: HomeComponent },
@@ -40,6 +41,7 @@ export const routes: Routes = [
       children:[
         { path: '', redirectTo: 'accueil', pathMatch: 'full' },
         { path: 'accueil', component: AdminAccueilComponent },
+        { path: 'services', component: AdminValidateComponent },
         { path: 'customers', component: AdminCustomersComponent },
         { path: 'providers', component: AdminProvidersComponent },
         { path: 'settings', component: AdminSettingsComponent },

@@ -3,6 +3,7 @@
 @tailwind utilities;
 @import "primeng/resources/themes/lara-light-blue/theme.css";
 @import "primeng/resources/primeng.css";
+@import "primeicons/primeicons.css";
 
 h6,h7{line-height:1.6}
 .material-icons {font-family: 'Material Icons' !important;}
@@ -226,7 +227,7 @@ table{
 }
 
 
-app-admin-accueil{
+app-admin-accueil,app-admin-validate{
   width: 100%;
 }
 
