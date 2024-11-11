@@ -1,18 +1,16 @@
 import {Component, OnInit} from '@angular/core';
 import {MatIcon} from "@angular/material/icon";
-import {NgIf} from "@angular/common";
+import {CommonModule} from "@angular/common";
 import {Person} from "@interfaces/person";
 import {User} from "@interfaces/user";
 import {ActivatedRoute} from "@angular/router";
 import {Balance} from "@interfaces/balance";
+import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-    imports: [
-        MatIcon,
-        NgIf
-    ],
+    imports: [CommonModule, ReactiveFormsModule, MatIcon],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })
@@ -22,7 +20,8 @@ export class ProfileComponent implements OnInit {
   currentUser: Person | null = null;
   users: User[] = [];
   isProvider: boolean = false;
-
+  isModify: boolean = false;
+  form!:FormGroup
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
@@ -65,6 +64,9 @@ export class ProfileComponent implements OnInit {
       this.isProvider = this.currentUser.user[0].role.some(role => role.name === 'provider');
     }
   }
-} {
 
+  modify(){
+    this.isModify = !this.isModify;
+  }
+  
 }

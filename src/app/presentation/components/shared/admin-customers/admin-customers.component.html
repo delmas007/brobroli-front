@@ -1,1 +1,25 @@
-<p>admin-customers works!</p>
+<p-table [value]="users">
+  <ng-template pTemplate="header" let-columns>
+      <tr>
+          <th>Profile </th>
+          <th>Nom</th>
+          <th>Role</th>
+      </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-users let-columns="columns">
+      <tr>
+          <td>
+            <img [src]="users.urlProfile" alt="Profile Image">
+          </td>
+          <td>
+            {{users.name}}
+          </td>
+          <td>
+              {{users.role}}
+          </td>
+          <td>
+              {{users.quantity}}
+          </td>
+      </tr>
+  </ng-template>
+</p-table>
