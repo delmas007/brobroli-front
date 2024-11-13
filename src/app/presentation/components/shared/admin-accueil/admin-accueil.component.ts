@@ -31,7 +31,8 @@ export class AdminAccueilComponent implements OnInit {
     this.users = [
       { urlProfile: 'path/to/image1.jpg', name: 'John Doe', role: 'Client' },
       { urlProfile: 'path/to/image2.jpg', name: 'Jane Smith', role: 'Client' },
-      { urlProfile: 'path/to/image3.jpg', name: 'Emily Johnson', role: 'Prestataire' }
+      { urlProfile: 'path/to/image3.jpg', name: 'Emily Johnson', role: 'Prestataire' },
+      { urlProfile: 'path/to/image3.jpg', name: 'Delon Jean-Philippe', role: 'Prestataire' }
     ];
       const documentStyle = getComputedStyle(document.documentElement);
       const textColor = documentStyle.getPropertyValue('--text-color');
@@ -48,9 +49,9 @@ export class AdminAccueilComponent implements OnInit {
         labels: ['Client', 'Prestataire'],
         datasets: [
             {
-                data: [300, 50],
-                backgroundColor: [documentStyle.getPropertyValue('--blue-500'), documentStyle.getPropertyValue('--yellow-500'), documentStyle.getPropertyValue('--green-500')],
-                hoverBackgroundColor: [documentStyle.getPropertyValue('--blue-400'), documentStyle.getPropertyValue('--yellow-400'), documentStyle.getPropertyValue('--green-400')]
+                data: [9, 21],
+                backgroundColor: ['#14c0b7', '#113634', '#113634'],
+                hoverBackgroundColor: ['#14c0b7', '#113634', '#113634']
             }
         ]
     };

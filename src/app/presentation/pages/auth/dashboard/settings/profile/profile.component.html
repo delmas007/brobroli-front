@@ -3,7 +3,7 @@
   <h2 class="m-0">Mon profil</h2>
   <hr>
   <p class="text-gray-600 font-medium">Gérez vos informations personnelles et vos préférences de profil.</p>
-  <div class=" font-sans">
+  <form [formGroup]="form" class=" font-sans">
     <div class="container mx-auto min-h-screen max-w-5xl">
 
       <header class="bg-white box-shadow1 rounded-xl p-6 mb-6">
@@ -15,8 +15,8 @@
               <h5 class="title-username">{{ currentUser?.biographie }}</h5>
             </div>
           </div>
-          <button class="btn-edit">Modifier <mat-icon class="text-lg">edit</mat-icon></button>
-          <button class="btn-edit-responsive"><mat-icon class="text-base">edit</mat-icon></button>
+          <button (click)="modify()" type="button" class="btn-edit">Modifier <mat-icon class="text-lg">edit</mat-icon></button>
+          <button type="button" class="btn-edit-responsive"><mat-icon class="text-base">edit</mat-icon></button>
         </div>
         <div class="flex flex-wrap gap-4 text-sm mt-1 text-gray-600">
           <p>📧 {{ currentUser?.email }}</p>
@@ -29,8 +29,7 @@
         <div class="mb-6">
           <div class="flex justify-between items-center relative">
             <span class="text-4xl font-bold text-gray-800">Résumé</span>
-            <button class="btn-edit">Modifier <mat-icon class="text-lg">edit</mat-icon></button>
-            <button class="btn-edit-responsive"><mat-icon class="text-base">edit</mat-icon></button>
+
           </div>
           <p class="text-gray-600 mt-3">Développeur fullstack passionné avec 5 ans d'expérience dans la création d'applications web robustes et évolutives. Expertise en JavaScript, React, Node.js et bases de données SQL/NoSQL.</p>
         </div>
@@ -40,8 +39,7 @@
         <div class="mb-6">
           <div class="flex justify-between items-center relative">
             <span class="text-4xl  font-bold  text-gray-800">Expérience Professionnelle</span>
-            <button class="btn-edit">Modifier <mat-icon class="text-lg">edit</mat-icon></button>
-            <button class="btn-edit-responsive"><mat-icon class="text-base">edit</mat-icon></button>
+
           </div>
           <div class="mb-4 mt-3">
             <span class="text-xl font-medium text-gray-800">Développeur Fullstack Senior - TechCorp </span>
@@ -67,8 +65,7 @@
         <div class="mb-6">
           <div class="flex justify-between items-center relative">
             <span class="text-4xl font-bold text-gray-800 mb-3 flex items-center gap-2">Compétences</span>
-            <button class="btn-edit">Modifier <mat-icon class="text-lg">edit</mat-icon></button>
-            <button class="btn-edit-responsive"><mat-icon class="text-base">edit</mat-icon></button>
+
           </div>
           <ul class="flex flex-wrap gap-2">
             <li class="bg-gray-200 px-3 py-1 rounded-full text-sm text-gray-700">JavaScript</li>
@@ -80,6 +77,7 @@
             <li class="bg-gray-200 px-3 py-1 rounded-full text-sm text-gray-700">PostgreSQL</li>
             <li class="bg-gray-200 px-3 py-1 rounded-full text-sm text-gray-700">Docker</li>
             <li class="bg-gray-200 px-3 py-1 rounded-full text-sm text-gray-700">Git</li>
+            <li *ngIf="isModify" class=" bg-[#14C0B7] font-bold px-3 py-1 rounded-full text-sm text-white">+</li>
           </ul>
         </div>
       </main>
@@ -88,8 +86,6 @@
         <div class="mb-6">
           <div class="flex justify-between items-center relative">
             <span class="text-4xl font-bold text-gray-800 mb-3">Formation</span>
-            <button class="btn-edit">Modifier <mat-icon class="text-lg">edit</mat-icon></button>
-            <button class="btn-edit-responsive"><mat-icon class="text-base">edit</mat-icon></button>
           </div>
           <div>
             <span class="text-lg font-medium text-gray-800">Master en Informatique </span>
@@ -100,6 +96,6 @@
 
 
     </div>
-  </div>
+  </form>
 </section>
 </div>

@@ -5,11 +5,11 @@
             <hr>
             <div class="settings-aside">
                 <div class="">
-                    <a [routerLink]="[]" fragment="profile"><mat-icon>person</mat-icon>Mon profil</a>
+                    <a [routerLink]="[]" ><mat-icon>person</mat-icon>Mon profil</a>
                     <a *ngIf="isProvider" [routerLink]="[]" fragment="services"><mat-icon>work</mat-icon>Mes services</a>
-                    <a [routerLink]="[]" fragment="portefeuille"><mat-icon>account_balance_wallet</mat-icon>Mon Portefeuille</a>
-                    <a [routerLink]="[]" fragment="notifications"><mat-icon>notifications</mat-icon>Notifications</a>
-                    <a [routerLink]="[]" fragment="securite"><mat-icon>security</mat-icon>Sécurité</a>
+                    <a [routerLink]="[]"><mat-icon>account_balance_wallet</mat-icon>Mon Portefeuille</a>
+                    <a [routerLink]="[]"><mat-icon>notifications</mat-icon>Notifications</a>
+                    <a [routerLink]="[]" ><mat-icon>security</mat-icon>Sécurité</a>
                 </div>
                 <div class="">
                     <a [routerLink]="isProvider ? '/dashboard-prestataire' : '/dashboard-client'">
