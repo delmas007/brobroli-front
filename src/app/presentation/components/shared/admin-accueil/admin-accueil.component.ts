@@ -3,6 +3,7 @@ import { ChartModule } from 'primeng/chart';
 import { TableModule } from 'primeng/table';
 import { TagModule } from 'primeng/tag';
 import { RatingModule } from 'primeng/rating';
+import {RouterLink} from "@angular/router";
 interface Column {
   field: string;
   header: string;
@@ -11,11 +12,12 @@ interface Users{
   urlProfile:string
   name:string
   role:string
+  prenom:string
 }
 @Component({
   selector: 'app-admin-accueil',
   standalone: true,
-  imports: [TableModule, TagModule, RatingModule, ChartModule],
+  imports: [TableModule, TagModule, RatingModule, ChartModule, RouterLink],
   templateUrl: './admin-accueil.component.html',
   styleUrl: './admin-accueil.component.css'
 })
@@ -29,10 +31,10 @@ export class AdminAccueilComponent implements OnInit {
 
 
     this.users = [
-      { urlProfile: 'path/to/image1.jpg', name: 'John Doe', role: 'Client' },
-      { urlProfile: 'path/to/image2.jpg', name: 'Jane Smith', role: 'Client' },
-      { urlProfile: 'path/to/image3.jpg', name: 'Emily Johnson', role: 'Prestataire' },
-      { urlProfile: 'path/to/image3.jpg', name: 'Delon Jean-Philippe', role: 'Prestataire' }
+      { urlProfile: 'personne (1).png', name: 'John',prenom:'Doe', role: 'Client' },
+      { urlProfile: 'personne (1).png', name: 'Jane',prenom:'Smith', role: 'Client' },
+      { urlProfile: 'personne (1).png', name: 'Emily',prenom:'Johnson', role: 'Prestataire' },
+      { urlProfile: 'personne (1).png', name: 'Delon',prenom:'Jean-Philippe', role: 'Prestataire' }
     ];
       const documentStyle = getComputedStyle(document.documentElement);
       const textColor = documentStyle.getPropertyValue('--text-color');
@@ -50,8 +52,8 @@ export class AdminAccueilComponent implements OnInit {
         datasets: [
             {
                 data: [9, 21],
-                backgroundColor: ['#14c0b7', '#113634', '#113634'],
-                hoverBackgroundColor: ['#14c0b7', '#113634', '#113634']
+              backgroundColor: ['#14c0b7', '#28a745'],
+              hoverBackgroundColor: ['#12a299', '#218838']
             }
         ]
     };
@@ -64,7 +66,10 @@ export class AdminAccueilComponent implements OnInit {
                   color: textColor
               }
           }
-      }
+      },
+      responsive: true,
+      maintainAspectRatio: false,
+      backgroundColor: 'white'
   };
   }
 }

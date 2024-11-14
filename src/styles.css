@@ -16,7 +16,9 @@ h5,h6,h7{font-weight:400}h5{font-size:1.5rem;line-height:1.5}h6{font-size:1.25re
 .mat-display-small, .mat-typography .mat-display-small, .mat-typography h3 {line-height: normal !important;}
 .main-color{color: #14C0B7;}
 
-
+app-admin-customers,app-admin-accueil,app-admin-validate,app-admin-providers{
+  width: 100%;
+}
 .logo{
     width: 180px;
     height: auto;
