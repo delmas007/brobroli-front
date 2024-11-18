@@ -41,7 +41,7 @@
         </div>
       </a>
       <a routerLink="/projects" class="card-lg-2">
-        <img class="card-image" loading="lazy" src="media/images/project.png" alt="">
+        <img class="card-image" loading="lazy" sizes="10px" src="media/images/project.png" alt="">
         <div>
           <p class="font-bold">Collaboration réussie</p>
           <span class="backg">0</span>
@@ -61,6 +61,7 @@
                 <tr>
                     <th>Profile </th>
                     <th>Nom</th>
+                    <th>Prenom</th>
                     <th>Role</th>
                 </tr>
             </ng-template>
@@ -71,6 +72,9 @@
                     </td>
                     <td>
                       {{users.name}}
+                    </td>
+                    <td>
+                      {{users.prenom}}
                     </td>
                     <td>
                         {{users.role}}

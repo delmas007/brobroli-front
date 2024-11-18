@@ -59,7 +59,7 @@ export const routes: Routes = [
     { path: 'terms-and-conditions', component: UsageConditionComponent },
     { path: 'add-competence', component: SkillsAddComponent },
 
-    { path:'delmas', component: AdminDashComponent,
+    { path:'admin', component: AdminDashComponent,
       children:[
         { path: '', redirectTo: 'accueil', pathMatch: 'full' },
         { path: 'accueil', component: AdminAccueilComponent },
