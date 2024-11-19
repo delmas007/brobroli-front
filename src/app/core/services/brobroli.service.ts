@@ -91,4 +91,34 @@ export class BrobroliService {
     console.log(password)
     return this.http.post<any>(`${this.host}/validation/nouveau-mot-de-passe`,password)
   }
+  getInfoUser(): Observable<any> {
+    return this.http.get<any>(`${this.host}/admin`);
+  }
+  getServices(): Observable<any> {
+    return this.http.get<any>(`${this.host}/admin/services`);
+  }
+  getCustomers(): Observable<any> {
+    return this.http.get<any>(`${this.host}/admin/customers`);
+  }
+  getProviders(): Observable<any> {
+    return this.http.get<any>(`${this.host}/admin/providers`);
+  }
+  validSercice(id:number): Observable<any> {
+    return this.http.put<any>(`${this.host}/admin/service/valid/${id}`, {});
+  }
+  rejectService(id:number): Observable<any> {
+    return this.http.put<any>(`${this.host}/admin/service/reject/${id}`, {});
+  }
+  activateProvider(id:number): Observable<any> {
+    return this.http.put<any>(`${this.host}/admin/provider/activate/${id}`, {});
+  }
+  deactivateProvider(id:number): Observable<any> {
+    return this.http.put<any>(`${this.host}/admin/provider/deactivate/${id}`, {});
+  }
+  activateCustomer(id:number): Observable<any> {
+    return this.http.put<any>(`${this.host}/admin/customer/activate/${id}`, {});
+  }
+  deactivateCustomer(id:number): Observable<any> {
+    return this.http.put<any>(`${this.host}/admin/customer/deactivate/${id}`, {});
+  }
 }
