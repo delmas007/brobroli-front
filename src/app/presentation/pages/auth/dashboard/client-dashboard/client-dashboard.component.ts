@@ -28,6 +28,7 @@ export class ClientDashboardComponent implements OnInit {
   modalWithdrawOpen = false;
   searchOpen = false;
   currentUser: Person | null = null;
+  successMessage: string = '';
   users: User[] = [];
   slides: any[] = [];
   private router: Router;
@@ -94,6 +95,8 @@ export class ClientDashboardComponent implements OnInit {
       data => {
         console.log(data);
         this.getProlfil();
+        this.rechargeForm.reset();
+        this.successMessage = 'Compte rechargé avec succès';
       },
       error => {
         console.log(error);
@@ -138,7 +141,7 @@ export class ClientDashboardComponent implements OnInit {
   onPaySubmit(): void {
     console.log('Rechargement du solde');
   }
-  onWithdrawSubmit(): void {
+ onWithdrawSubmit(): void {
     console.log('Retrait du solde');
   }
   onSearch(): void {
