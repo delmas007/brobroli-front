@@ -13,8 +13,15 @@
         <p>Vous avez la possibilité d'annuler cette collaboration et vous faire rembourser tant que le prestataire n'a pas encore accepté votre demande.</p>
         <div *ngIf="errorMessage" class="transition-all duration-300 text-center">
           <p class="error-message">{{errorMessage}}</p>
+          <a [routerLink]="['/dashboard-client']" class="btn btn-primary">
+            <h6 class="recharge-text">Recharger votre compte</h6>
+
+          </a>
+
         </div>
         <button *ngIf="showPayButton" (click)="collaborer()" class="btn-link w-full">Payer</button>
+
+
       </div>
     </div>
   </div>
