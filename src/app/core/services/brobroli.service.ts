@@ -92,33 +92,33 @@ export class BrobroliService {
     return this.http.post<any>(`${this.host}/validation/nouveau-mot-de-passe`,password)
   }
   getInfoUser(): Observable<any> {
-    return this.http.get<any>(`${this.host}/admin`);
+    return this.http.get<any>(`${this.host}/v1/admin`);
   }
   getServices(): Observable<any> {
-    return this.http.get<any>(`${this.host}/admin/services`);
+    return this.http.get<any>(`${this.host}/v1/admin/services`);
   }
   getCustomers(): Observable<any> {
-    return this.http.get<any>(`${this.host}/admin/customers`);
+    return this.http.get<any>(`${this.host}/v1/admin/customers`);
   }
   getProviders(): Observable<any> {
-    return this.http.get<any>(`${this.host}/admin/providers`);
+    return this.http.get<any>(`${this.host}/v1/admin/providers`);
   }
   validSercice(id:number): Observable<any> {
-    return this.http.put<any>(`${this.host}/admin/service/valid/${id}`, {});
+    return this.http.put<any>(`${this.host}/v1/admin/service/valid/${id}`, {});
   }
   rejectService(id:number): Observable<any> {
-    return this.http.put<any>(`${this.host}/admin/service/reject/${id}`, {});
+    return this.http.put<any>(`${this.host}/v1/admin/service/reject/${id}`, {});
   }
   activateProvider(id:number): Observable<any> {
-    return this.http.put<any>(`${this.host}/admin/provider/activate/${id}`, {});
+    return this.http.put<any>(`${this.host}/v1/admin/provider/activate/${id}`, {});
   }
   deactivateProvider(id:number): Observable<any> {
-    return this.http.put<any>(`${this.host}/admin/provider/deactivate/${id}`, {});
+    return this.http.put<any>(`${this.host}/v1/admin/provider/deactivate/${id}`, {});
   }
   activateCustomer(id:number): Observable<any> {
-    return this.http.put<any>(`${this.host}/admin/customer/activate/${id}`, {});
+    return this.http.put<any>(`${this.host}/v1/admin/customer/activate/${id}`, {});
   }
   deactivateCustomer(id:number): Observable<any> {
-    return this.http.put<any>(`${this.host}/admin/customer/deactivate/${id}`, {});
+    return this.http.put<any>(`${this.host}/v1/admin/customer/deactivate/${id}`, {});
   }
 }
