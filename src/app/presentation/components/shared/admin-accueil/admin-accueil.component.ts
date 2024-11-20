@@ -4,6 +4,8 @@ import { TableModule } from 'primeng/table';
 import { TagModule } from 'primeng/tag';
 import { RatingModule } from 'primeng/rating';
 import {RouterLink} from "@angular/router";
+import {BrobroliService} from "@services/brobroli.service";
+import {Info} from "@interfaces/Info";
 interface Column {
   field: string;
   header: string;
@@ -24,18 +26,53 @@ interface Users{
 export class AdminAccueilComponent implements OnInit {
   data: any;
   options: any;
-  users!: Users[];
+  users: Users[] = [];
   cols!: Column[];
+  infoUser!:Info;
+  constructor(private service:BrobroliService) {
+  }
 
   ngOnInit() {
+    this.service.getInfoUser().subscribe({
+      next: (response) => {
+        console.log(response);
+        this.infoUser = response;
+        console.log('infoUser :',this.infoUser);
+      },
+      error: (error) => {
+        console.log(error);
+    }
+    });
+    this.users = [];
 
+    if (this.infoUser.listCustomer && this.infoUser.listCustomer.length > 0) {
+      for (let i = 0; i < 1; i++) {
+        this.users.push({
+          urlProfile: 'personne (1).png',
+          name: this.infoUser.listCustomer[i].user.userName,
+          prenom: this.infoUser.listCustomer[i].firstName,
+          role: this.infoUser.listCustomer[i].user.role.role
+        });
+      }
+    }
 
-    this.users = [
-      { urlProfile: 'personne (1).png', name: 'John',prenom:'Doe', role: 'Client' },
-      { urlProfile: 'personne (1).png', name: 'Jane',prenom:'Smith', role: 'Client' },
-      { urlProfile: 'personne (1).png', name: 'Emily',prenom:'Johnson', role: 'Prestataire' },
-      { urlProfile: 'personne (1).png', name: 'Delon',prenom:'Jean-Philippe', role: 'Prestataire' }
-    ];
+    if (this.infoUser.listProvider && this.infoUser.listProvider.length > 0) {
+      for (let i = 0; i < 1; i++) {
+        this.users.push({
+          urlProfile: 'personne (1).png',
+          name: this.infoUser.listProvider[i].user.userName,
+          prenom:this.infoUser.listProvider[i].firstName,
+          role: this.infoUser.listProvider[i].user.role.role
+        });
+      }
+    }
+
+    // this.users = [
+    //   { urlProfile: 'personne (1).png', name: 'John',prenom:'Doe', role: 'Client' },
+    //   { urlProfile: 'personne (1).png', name: 'Jane',prenom:'Smith', role: 'Client' },
+    //   { urlProfile: 'personne (1).png', name: 'Emily',prenom:'Johnson', role: 'Prestataire' },
+    //   { urlProfile: 'personne (1).png', name: 'Delon',prenom:'Jean-Philippe', role: 'Prestataire' }
+    // ];
       const documentStyle = getComputedStyle(document.documentElement);
       const textColor = documentStyle.getPropertyValue('--text-color');
       const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
@@ -51,7 +88,7 @@ export class AdminAccueilComponent implements OnInit {
         labels: ['Client', 'Prestataire'],
         datasets: [
             {
-                data: [9, 21],
+                data: [this.infoUser.numberCustomer, this.infoUser.numberProvider],
               backgroundColor: ['#14c0b7', '#28a745'],
               hoverBackgroundColor: ['#12a299', '#218838']
             }

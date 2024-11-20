@@ -15,14 +15,14 @@
           <img src="media/images/freelancer2.png" alt="">
           <div class="">
             <p class="font-bold text-xl">Prestataire</p>
-            <p class="font-bold text-3xl text-[#14c0b7]">21</p>
+            <p class="font-bold text-3xl text-[#14c0b7]">{{infoUser.numberProvider}}</p>
           </div>
         </div>
         <div class="card-users">
           <img  src="media/images/freelancer3.png" alt="">
           <div class="">
             <p class="font-bold text-xl">Client</p>
-            <p class="font-bold text-3xl text-[#14c0b7]">9</p>
+            <p class="font-bold text-3xl text-[#14c0b7]">{{infoUser.numberCustomer}}</p>
           </div>
         </div>
       </div>
@@ -37,21 +37,21 @@
         <img class="card-image" loading="lazy" src="media/images/project.png" alt="">
         <div>
           <p class="font-bold">Service a valider</p>
-          <span class="backg">250</span>
+          <span class="backg">{{infoUser.numberServiceEnAttente}}</span>
         </div>
       </a>
       <a routerLink="/projects" class="card-lg-2">
         <img class="card-image" loading="lazy" sizes="10px" src="media/images/project.png" alt="">
         <div>
           <p class="font-bold">Collaboration réussie</p>
-          <span class="backg">0</span>
+          <span class="backg">{{infoUser.numberCollaborationReussi}}</span>
         </div>
       </a>
       <a routerLink="/projects" class="card-lg-3">
         <img class="card-image" loading="lazy" src="media/images/money.png" alt="">
         <div>
-          <p class="font-bold">Revenue mensuelle</p>
-          <span class="backg">0</span>
+          <p class="font-bold">Revenue</p>
+          <span class="backg">{{infoUser.revenue}}</span>
         </div>
       </a>
     </div>
