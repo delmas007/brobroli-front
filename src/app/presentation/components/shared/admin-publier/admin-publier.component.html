@@ -1,5 +1,5 @@
 <main>
-  <p class="title">Services en attente</p>
+  <p class="title">Services publier</p>
   <table>
     <thead>
     <tr>
@@ -9,7 +9,7 @@
       <th>Prix</th>
       <th>Durée</th>
       <th>Date</th>
-<!--      <th>Statut</th>-->
+      <!--      <th>Statut</th>-->
       <th class="right-radius">Action</th>
     </tr>
     </thead>
@@ -24,8 +24,7 @@
       <!--      <td><div class="services-status pending">En attente</div></td>-->
       <td>
         <div class="flex items-center gap-2">
-          <button class="btn-link confirm-btn" (click)="validate(service.id)"><i class="pi pi-check"></i> Confirmer</button>
-          <button class="btn-link reject-btn" (click)="invalid(service.id)"><i class="pi pi-times"></i> Refuser</button>
+          <button class="btn-link reject-btn" (click)="invalid(service.id)"><i class="pi pi-times"></i> Delister</button>
         </div>
       </td>
     </tr>

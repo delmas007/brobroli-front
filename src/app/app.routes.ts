@@ -29,6 +29,7 @@ import {ForgotPasswordComponent} from "@auth/forgot-password/forgot-password.com
 import {ResetPassawordComponent} from "@auth/reset-passaword/reset-passaword.component";
 import {VerifyCodeComponent} from "@auth/verify-code/verify-code.component";
 import { AdminValidateComponent } from './presentation/components/shared/admin-validate/admin-validate.component';
+import {AdminPublierComponent} from "@shared/admin-publier/admin-publier.component";
 export const routes: Routes = [
 
     { path: '', component: HomeComponent },
@@ -63,7 +64,8 @@ export const routes: Routes = [
       children:[
         { path: '', redirectTo: 'accueil', pathMatch: 'full' },
         { path: 'accueil', component: AdminAccueilComponent },
-        { path: 'services', component: AdminValidateComponent },
+        { path: 'services/attente', component: AdminValidateComponent },
+        { path: 'services/publier', component: AdminPublierComponent },
         { path: 'customers', component: AdminCustomersComponent },
         { path: 'providers', component: AdminProvidersComponent },
         { path: 'settings', component: AdminSettingsComponent },

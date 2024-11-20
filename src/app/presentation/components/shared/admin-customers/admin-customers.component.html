@@ -12,111 +12,19 @@
       </tr>
       </thead>
       <tbody>
-      <tr>
-        <td>Delon</td>
-        <td>delonexample.com</td>
-        <td>+123456789</td>
-        <td>2023-11-10</td>
+      <tr *ngFor="let customer of customers">
+        <td>{{customer.user.userName}}</td>
+        <td>{{customer.email}}</td>
+        <td>{{customer.tel}}</td>
+        <td>{{customer.createAt | date:'dd/MM/yyyy'}}</td>
         <td>
           <div class="flex items-center gap-2">
-            <button class="btn-link confirm-btn"><i class="pi pi-check"></i> Activer</button>
-            <button class="btn-link reject-btn"><i class="pi pi-times"></i> Désactiver</button>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td>Delon</td>
-        <td>delonexample.com</td>
-        <td>+123456789</td>
-        <td>2023-11-10</td>
-        <td>
-          <div class="flex items-center gap-2">
-            <button class="btn-link confirm-btn"><i class="pi pi-check"></i> Activer</button>
-            <button class="btn-link reject-btn"><i class="pi pi-times"></i> Désactiver</button>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td>Delon</td>
-        <td>delonexample.com</td>
-        <td>+123456789</td>
-        <td>2023-11-10</td>
-        <td>
-          <div class="flex items-center gap-2">
-            <button class="btn-link confirm-btn"><i class="pi pi-check"></i> Activer</button>
-            <button class="btn-link reject-btn"><i class="pi pi-times"></i> Désactiver</button>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td>Delon</td>
-        <td>delonexample.com</td>
-        <td>+123456789</td>
-        <td>2023-11-10</td>
-        <td>
-          <div class="flex items-center gap-2">
-            <button class="btn-link confirm-btn"><i class="pi pi-check"></i> Activer</button>
-            <button class="btn-link reject-btn"><i class="pi pi-times"></i> Désactiver</button>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td>Delon</td>
-        <td>delonexample.com</td>
-        <td>+123456789</td>
-        <td>2023-11-10</td>
-        <td>
-          <div class="flex items-center gap-2">
-            <button class="btn-link confirm-btn"><i class="pi pi-check"></i> Activer</button>
-            <button class="btn-link reject-btn"><i class="pi pi-times"></i> Désactiver</button>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td>Delon</td>
-        <td>delonexample.com</td>
-        <td>+123456789</td>
-        <td>2023-11-10</td>
-        <td>
-          <div class="flex items-center gap-2">
-            <button class="btn-link confirm-btn"><i class="pi pi-check"></i> Activer</button>
-            <button class="btn-link reject-btn"><i class="pi pi-times"></i> Désactiver</button>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td>Delon</td>
-        <td>delonexample.com</td>
-        <td>+123456789</td>
-        <td>2023-11-10</td>
-        <td>
-          <div class="flex items-center gap-2">
-            <button class="btn-link confirm-btn"><i class="pi pi-check"></i> Activer</button>
-            <button class="btn-link reject-btn"><i class="pi pi-times"></i> Désactiver</button>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td>Delon</td>
-        <td>delonexample.com</td>
-        <td>+123456789</td>
-        <td>2023-11-10</td>
-        <td>
-          <div class="flex items-center gap-2">
-            <button class="btn-link confirm-btn"><i class="pi pi-check"></i> Activer</button>
-            <button class="btn-link reject-btn"><i class="pi pi-times"></i> Désactiver</button>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td>Delon</td>
-        <td>delonexample.com</td>
-        <td>+123456789</td>
-        <td>2023-11-10</td>
-        <td>
-          <div class="flex items-center gap-2">
-            <button class="btn-link confirm-btn"><i class="pi pi-check"></i> Activer</button>
-            <button class="btn-link reject-btn"><i class="pi pi-times"></i> Désactiver</button>
+            <ng-container *ngIf="customer.user.actif">
+              <button class="btn-link reject-btn" (click)="deActiverCustomer(customer.id)"><i class="pi pi-times"></i> Désactiver</button>
+            </ng-container>
+            <ng-container *ngIf="!customer.user.actif">
+              <button class="btn-link confirm-btn" (click)="activerCustomer(customer.id)"><i class="pi pi-check"></i> Activer</button>
+            </ng-container>
           </div>
         </td>
       </tr>

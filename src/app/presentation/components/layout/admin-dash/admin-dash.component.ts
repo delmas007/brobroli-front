@@ -10,7 +10,8 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./admin-dash.component.css'],
 })
 export class AdminDashComponent implements OnInit {
-  isAsideOpen:boolean = true
+  isAsideOpen:boolean = true;
+  isServicesOpen: boolean = false;
   constructor() { }
 
   ngOnInit() {

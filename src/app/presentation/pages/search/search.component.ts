@@ -72,21 +72,23 @@ export class SearchComponent implements OnInit {
     this.service.search(this.typeService, this.minPrice, this.maxPrice).subscribe(
       (response: any) => {
         for (let i = 0; i < response.length; i++) {
-          const providerSkills = response[i].provider.skills.map((skill: { skillName: string }) => skill.skillName);
-          this.servicee = {
-            id: response[i].id,
-            description: response[i].description,
-            duration: response[i].duration,
-            price: response[i].price,
-            provider: {
-              id: response[i].provider.id,
-              skills: providerSkills
-            },
-            typeService: response[i].typeService
-          };
-          this.services.push(this.servicee);
+          if (response[i].status === 'VALID') {
+            const providerSkills = response[i].provider.skills.map((skill: { skillName: string }) => skill.skillName);
+            this.servicee = {
+              id: response[i].id,
+              description: response[i].description,
+              duration: response[i].duration,
+              price: response[i].price,
+              provider: {
+                id: response[i].provider.id,
+                skills: providerSkills
+              },
+              typeService: response[i].typeService
+            };
+            this.services.push(this.servicee);
+          }
         }
-        console.log(this.services);
+        // console.log(this.services);
       },
       (error: any) => {
         console.log(error);

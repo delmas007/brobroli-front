@@ -1,15 +1,19 @@
-import {Component, OnInit, signal} from '@angular/core';
-import { CommonModule } from '@angular/common';
-import {BrobroliService} from "@services/brobroli.service";
+import {Component, signal} from '@angular/core';
+import {DatePipe, NgForOf} from "@angular/common";
 import {ServiceAttente} from "@interfaces/ServiceAttente";
+import {BrobroliService} from "@services/brobroli.service";
+
 @Component({
-  selector: 'app-admin-validate',
+  selector: 'app-admin-publier',
   standalone: true,
-  imports: [CommonModule],
-  templateUrl: './admin-validate.component.html',
-  styleUrl: './admin-validate.component.css'
+    imports: [
+        DatePipe,
+        NgForOf
+    ],
+  templateUrl: './admin-publier.component.html',
+  styleUrl: './admin-publier.component.css'
 })
-export class AdminValidateComponent implements OnInit {
+export class AdminPublierComponent {
   services = signal<ServiceAttente[]>([]);
   constructor(private service:BrobroliService) { }
 
@@ -20,7 +24,7 @@ export class AdminValidateComponent implements OnInit {
     this.service.getServices().subscribe({
       next: (data) => {
         console.log(data);
-        this.services.set(data.filter((service: any) => service.status === 'ON_HOLD'));
+        this.services.set(data.filter((service: any) => service.status === 'VALID'));
       },
       error: (error) => {
         console.log(error);
@@ -48,6 +52,4 @@ export class AdminValidateComponent implements OnInit {
       }
     });
   }
-
-
 }
