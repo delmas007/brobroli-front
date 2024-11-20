@@ -16,6 +16,7 @@ import {StateService} from "@services/state.service";
   styleUrl: './register.component.css'
 })
 export class RegisterComponent implements OnInit {
+
   errorMessage: any;
   formRegister!: FormGroup;
   loading = false;
@@ -28,67 +29,81 @@ export class RegisterComponent implements OnInit {
   }
 
 
-  constructor(private router: Router,private fb:FormBuilder,private service: BrobroliService,private state:StateService) {
-  }
+  constructor(
+    private router: Router,
+    private fb: FormBuilder,
+    private service: BrobroliService,
+    private state: StateService
+  ) {}
 
   ngOnInit(): void {
     AOS.init();
+    this.initForm();
+  }
+  private initForm() {
     this.formRegister = this.fb.group({
-      username: this.fb.control("", [Validators.required]),
-      password: this.fb.control("", [Validators.required]),
-      email: this.fb.control("", [Validators.required,Validators.email]),
-      choix: this.fb.control("", [Validators.required]),
-      confirm_password: this.fb.control("", [Validators.required]),
+      username: ["", [Validators.required]],
+      password: ["", [Validators.required, Validators.minLength(6)]],
+      confirm_password: ["", [Validators.required]],
+      email: ["", [Validators.required, Validators.email]],
+      choix: ["", [Validators.required]],
+    }, {
+      validators: this.passwordMatchValidator
     });
   }
 
+  private passwordMatchValidator(group: FormGroup): { [key: string]: boolean } | null {
+    const password = group.get('password')?.value;
+    const confirmPassword = group.get('confirm_password')?.value;
+    return password === confirmPassword ? null : { notMatching: true };
+  }
+
+
+
   onRegister() {
     this.loading = true;
-    this.donnee.user.userName = this.formRegister.value.username;
-    this.donnee.user.password = this.formRegister.value.password;
-    this.donnee.email = this.formRegister.value.email;
     this.errorMessage = null;
+
+    setTimeout(() => {
+      console.log("Enregistrement terminé !");
+      this.loading = false;
+    }, 2000);
+
+
     if (this.formRegister.invalid) {
-      this.errorMessage = "Veuillez corriger les erreurs dans le formulaire.";
       this.loading = false;
+      this.errorMessage = "Veuillez bien renseigner le formulaire.";
+      this.formRegister.markAllAsTouched();
       return;
-    }
-    if (this.formRegister.value.password !== this.formRegister.value.confirm_password) {
-      this.errorMessage = "Les mots de passe ne correspondent pas.";
-      this.loading = false;
-      return;
-    }
-    if (this.formRegister.value.choix === "customer") {
-      this.service.inscriptionCustomer(this.donnee).subscribe(
-        data => {
-          console.log(data);
-          localStorage.setItem("email",this.donnee.email)
-          this.loading = false;
-          this.router.navigate(['/verify-code']);
-        },
-        error => {
-          console.log(error);
-          this.errorMessage = error.error.message;
-          this.loading = false;
-        }
-      );
-    }
-    if (this.formRegister.value.choix === "provider") {
-      this.service.inscriptionProvider(this.donnee).subscribe(
-        data => {
-          console.log(data);
-          this.loading = false;
-          localStorage.setItem("email",this.donnee.email)
-          this.router.navigate(['/verify-code']);
-        },
-        error => {
-          console.log(error);
-          this.loading = false;
-          this.errorMessage = error.error.message;
-        }
-      );
     }
 
+    const formValues = this.formRegister.value;
+    this.donnee.user.userName = formValues.username;
+    this.donnee.user.password = formValues.password;
+    this.donnee.email = formValues.email;
+
+
+    const request =
+      formValues.choix === "customer"
+      ? this.service.inscriptionCustomer(this.donnee)
+      : this.service.inscriptionProvider(this.donnee);
+
+    request.subscribe({
+      next: (data) => {
+        console.log(data);
+        localStorage.setItem("email", this.donnee.email);
+        this.loading = false;
+        this.router.navigate(['/verify-code']);
+      },
+      error: (error) => {
+        console.error(error);
+        this.errorMessage = error.error.message || "Une erreur inconnue est survenue.";
+        this.loading = false;
+      }
+    });
 
   }
+
+
+
 }
