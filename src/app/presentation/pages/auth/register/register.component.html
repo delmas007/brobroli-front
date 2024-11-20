@@ -15,21 +15,33 @@
                 <div class="form-row">
                     <div class="w-full px-2">
                         <label class="font-semibold mb-1" for="email">Nom d'utilisateur</label>
-                        <input type="text" name="username" id="username" placeholder="koffi_masta" formControlName="username">
+                        <input type="text" name="username" id="username" placeholder="koffi_masta" formControlName="username" >
+                        <div *ngIf="formRegister.get('username')?.invalid && formRegister.get('username')?.touched" class="error mb-4">
+                          Le nom d'utilisateur est obligatoire.
+                        </div>
                     </div>
                     <div class="w-full px-2">
                         <label class="font-semibold mb-1" for="password">Email</label>
                         <input type="email" name="email" id="email" placeholder="delmas@gmail.com" formControlName="email">
+                        <div class="error mb-4" *ngIf="formRegister.get('email')?.invalid && formRegister.get('email')?.touched">
+                          Email invalide
+                        </div>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="w-full px-2">
                         <label class="font-semibold mb-1" for="email">Mot de passe</label>
                         <input type="password" name="password" id="password" placeholder="********" formControlName="password">
+                        <p class="error" *ngIf="formRegister.get('password')?.invalid && formRegister.get('password')?.touched">
+                          Au moins 6 caractères
+                        </p>
                     </div>
                     <div class="w-full px-2">
                         <label class="font-semibold mb-1" for="password-confirm">Confirmation</label>
                         <input type="password" name="password-confirm" id="password-confirm" placeholder="********" formControlName="confirm_password">
+                        <div class="error" *ngIf="formRegister.get('confirm_password')?.invalid && formRegister.get('confirm_password')?.touched">
+                          Les mots de passe ne correspondent pas
+                        </div>
                     </div>
                 </div>
                 <div class="form-row">
@@ -39,9 +51,15 @@
                             <option value="provider">Un prestataire</option>
                             <option value="customer">Un client</option>
                         </select>
+                        <div *ngIf="formRegister.get('choix')?.invalid && formRegister.get('choix')?.touched" class="error">
+                          Veuillez sélectionner un rôle.
+                        </div>
                     </div>
                 </div>
-                <button class="btn-link btn-submit" type="submit">S'inscrire</button>
+              <button class="btn-link btn-submit" type="submit">
+                <span *ngIf="!loading">S'inscrire</span>
+                <span *ngIf="loading" class="loader">Chargement...</span>
+              </button>
             </form>
         </div>
         <p class="register-text">Déjà inscris ? <a routerLink="/login">connectez vous</a ></p>

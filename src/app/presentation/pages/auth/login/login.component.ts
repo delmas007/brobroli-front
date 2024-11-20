@@ -39,11 +39,13 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {AOS.init();
     this.formLogin = this.fb.group({
-      username: this.fb.control("", [Validators.required]),
-      password: this.fb.control("", [Validators.required]),
+      username: this.fb.control("", [Validators.required, Validators.minLength(3)]),
+      password: this.fb.control("", [Validators.required, Validators.minLength(6)]),
       rememberMe: this.fb.control(false)
     });
   }
+
+
 
   onLogin() {
     this.user.userName = this.formLogin.value.username;
@@ -51,31 +53,30 @@ export class LoginComponent implements OnInit {
     this.errorMessage = null;
     this.loading = true;
     if (this.formLogin.invalid) {
+      this.formLogin.markAllAsTouched();
       this.errorMessage = "Veuillez corriger les erreurs dans le formulaire.";
-      this.loading = false;
+      //this.loading = false;
       return;
     }
     this.service.login(this.user).subscribe({
-      next:(data: any)=>{
+      next: (data: any) => {
         localStorage.setItem('token', data.id_token);
         this.state.loadToken();
-        if (this.state.authState.role === 'SCOPE_CUSTOMER') {
-          this.loading = false;
+
+        const role = this.state.authState.role;
+        if (role === 'SCOPE_CUSTOMER') {
           this.router.navigate(['/dashboard-client']);
-        }
-        if (this.state.authState.role === 'SCOPE_PROVIDER') {
-          this.loading = false;
+        } else if (role === 'SCOPE_PROVIDER') {
           this.router.navigate(['/dashboard-prestataire']);
         }
+
+        this.loading = false;
       },
-      error:(err:any)=>{
-        console.log(err)
+      error: (err: any) => {
+        console.log(err);
+        this.errorMessage = err.error.message || "Une erreur est survenue.";
         this.loading = false;
-        this.errorMessage = err.error.message;
-    },
-      complete:()=>{
-        this.loading = false;
-      }
+      },
     });
 }
   }

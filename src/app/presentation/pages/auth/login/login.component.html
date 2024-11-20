@@ -16,9 +16,16 @@
             <form  class="login-form" [formGroup]="formLogin" (ngSubmit)="onLogin()">
                 <div class="form-inputs">
                     <label class="font-semibold mb-1" for="username">Nom d'utilisateur</label>
-                    <input type="text" name="username" id="username" placeholder="koffi_masta" formControlName="username">
+                    <input type="text" name="username" id="username" placeholder="koffi_masta" formControlName="username" [ngClass]="{'is-invalid': formLogin.get('username')?.invalid && formLogin.get('username')?.touched}"/>
+                    <p class="error-message" *ngIf="formLogin.get('username')?.invalid && formLogin.get('username')?.touched">
+                      Le nom d'utilisateur est obligatoire.
+                    </p>
+
                     <label class="font-semibold mb-1" for="password">Mot de passe</label>
-                    <input type="password" name="password" id="password" placeholder="********" formControlName="password">
+                    <input type="password" name="password" id="password" placeholder="********" formControlName="password"[ngClass]="{'is-invalid': formLogin.get('password')?.invalid && formLogin.get('password')?.touched}"/>
+                    <p class="error-message" *ngIf="formLogin.get('password')?.invalid && formLogin.get('password')?.touched">
+                      Le mot de passe est obligatoire.
+                    </p>
                 </div>
 
                 <div class="flex justify-between items-center mb-6">
