@@ -5,6 +5,8 @@
             <a href="">Catégories</a>
             <a href="">Services</a>
             <a href="">Clients</a>
+          <a *ngIf="isAuth" (click)="dashboard()" class="btn-tableau_de_bord">Tableau de bord</a>
+
         </div>
         <div class="hamburger" (click)="toggleMenu()" [ngClass]="{'active': isMenuOpen}">
             <span></span>
@@ -14,6 +16,7 @@
 
         <a *ngIf="!isAuth"  routerLink="/login" routerLinkActive="active" ariaCurrentWhenActive="page" class="btn-connexion">Se connecter</a>
         <a *ngIf="isAuth" (click)="deconnexion()" routerLinkActive="active" ariaCurrentWhenActive="page" class="btn-connexion">Deconnexion</a>
+
     </div>
     <div class="menu-modal" [ngClass]="{'active': isMenuOpen}">
 
