@@ -1,39 +1,66 @@
 <main>
-    <div class="card-profile">
-        <div class="flex items-center mb-4">
-            <img class="w-24 h-24 rounded-full mr-4" src="https://via.placeholder.com/150" alt="Profile Picture">
-            <div>
-                <span class="text-2xl font-bold">Koffi Masta</span>
-                <p class="text-gray-600">Profession</p>
-            </div>
-        </div>
-        <hr class="mb-4">
-        <div class="flex justify-start gap-4 mb-4">
-            <button class="btn-whatsapp">
-                WhatsApp <img src="media/images/whatsapp.png" alt="whatsapp">
-            </button>
-            <button class="btn-mail">
-                Mail <img src="media/images/mail.png" alt="mail">
-            </button>
-        </div>
-        <hr>
-        <div class="mb-4">
-            <h3 class="text-xl font-semibold mb-2">À propos de moi</h3>
-            <p class="text-gray-700">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque leo nec sem fermentum, a tincidunt nisi facilisis.</p>
-        </div>
-        <div class="mb-4">
-            <h3 class="text-xl font-semibold mb-2">Compétences</h3>
-            <ul class="flex text-gray-700">
-                <div class="work-mode">
-                    <span>Remote</span>
-                    <span>Full Time</span>
-                    <span>Design</span>
-                </div>
-            </ul>
-        </div>
+  <header class="header">
+    <img class="logo" src="media/images/Logo.png" alt="Logo">
+    <img class="retour" src="media/images/retour.png" alt="Logo">
 
-    </div>
+  </header>
+
+  <div class="profile-container">
+    <!-- Section gauche, photo et description -->
+    <section class="profile-left">
+      <div class="profile-photo">
+        <img [src]="currentUser?.photoUrl || 'media/images/profile.png'" alt="Profile Picture">
+      </div>
+      <div class="profile-summary">
+        <h3 >{{ currentUser?.firstName }} {{ currentUser?.lastName }}</h3>
+        <h2>{{ currentUser?.profession || 'Profession inconnue' }}</h2>
+        <p>{{ currentUser?.biographie || "Description indisponible" }}</p>
+      </div>
+    </section>
+
+    <!-- Section droite; compétences, certifications, contact -->
+    <section class="profile-right">
+      <div class="profile-skills">
+        <h3>Compétences principales</h3>
+        <ul>
+          <li *ngFor="let skill of currentUser?.skillLevels">
+            <span class="skill-name">{{ skill.name }}</span>
+            <span class="skill-level">({{ skill.level }})</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="profile-certifications">
+        <h3>Certifications</h3>
+        <div *ngFor="let cert of currentUser?.certifications">
+          <!--  lien des  certifications -->
+          <a *ngIf="cert.link" class="cert-link" [href]="cert.link" target="_blank">{{ cert.description }}</a>
+          <a *ngIf="cert.link" class="cert-link" [href]="cert.link" target="_blank">{{ cert.description }}</a>
+          <a *ngIf="cert.link" class="cert-link" [href]="cert.link" target="_blank">{{ cert.description }}</a>
+          <a *ngIf="cert.link" class="cert-link" [href]="cert.link" target="_blank">{{ cert.description }}</a>
+
+          <!-- Image pour les certifications -->
+          <img *ngIf="cert.imageUrl" class="cert-image " [src]="cert.imageUrl" alt="{{ cert.name }}" (click)="openModal(cert)">
+           <p *ngIf="cert.imageUrl" class="cert-description ">{{ cert.description }}</p>
+          <img *ngIf="cert.imageUrl" class="cert-image " [src]="cert.imageUrl" alt="{{ cert.name }}" (click)="openModal(cert)">
+          <p *ngIf="cert.imageUrl" class="cert-description ">{{ cert.description }}</p>
+          <img *ngIf="cert.imageUrl" class="cert-image " [src]="cert.imageUrl" alt="{{ cert.name }}" (click)="openModal(cert)">
+          <p *ngIf="cert.imageUrl" class="cert-description ">{{ cert.description }}</p>
+        </div>
+      </div>
+
+      <!-- Contact -->
+      <div class="profile-contact">
+        <h3>Contact</h3>
+        <a class="btn btn-whatsapp" href="#"><img src="media/images/whatsapp.png" alt="whatsapp"> WhatsApp</a>
+        <a class="btn btn-mail" [href]="'mailto:' + currentUser?.email"><img src="media/images/mail.png" alt="mail"> Mail</a>
+      </div>
+    </section>
+  </div>
+
+  <!-- Modal agrandir l'image de certification -->
+  <div class="modal" id="cert-modal">
+    <span class="close" (click)="closeModal()">×</span>
+    <img class="modal-content" id="modal-image" [src]="modalImage" alt="Certificat Agrandi">
+  </div>
 </main>
-
-
-
