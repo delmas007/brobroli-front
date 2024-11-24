@@ -23,6 +23,8 @@ import {BalanceSum} from "@interfaces/balanceSum";
 export class ClientDashboardComponent implements OnInit {
   balance:number = 0;
   title = 'client-dashboard';
+  urlImage!:string;
+  carrocel = false;
   menuOpen = false;
   modalPayOpen = false;
   modalWithdrawOpen = false;
@@ -30,6 +32,7 @@ export class ClientDashboardComponent implements OnInit {
   currentUser: Person | null = null;
   successMessage: string = '';
   users: User[] = [];
+  searchForm!: FormGroup;
   slides: any[] = [];
   private router: Router;
   rechargeForm!: FormGroup;
@@ -68,6 +71,10 @@ export class ClientDashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.searchForm = this.fb.group({
+      typeService: this.fb.control("", [Validators.required]),
+      tranche: this.fb.control("", [Validators.required])
+    });
     this.getProlfil();
     this.getBalance();
     this.getUsers();
@@ -78,11 +85,16 @@ export class ClientDashboardComponent implements OnInit {
 
   }
 
+
   getProlfil(): void {
     this.service.getCustomer(this.state.authState.id).subscribe(
       data => {
         console.log(data);
+        this.urlImage = data.urlProfil;
         this.balance= data.balance.sum
+        if (data.firstName !== null) {
+          this.carrocel = true;
+        }
       },
       error => {
         console.log(error);
@@ -130,14 +142,19 @@ export class ClientDashboardComponent implements OnInit {
       {imageSrc: 'media/images/freelancer-f.png', imageAlt: 'Freelancer', title: 'Mes projets', text: 'Obtenez une vue d\'ensemble complète de vos projets en cours et achevés.', url: '/projects-customer', btnText: 'Voir les projets'}
     ];
   }
-
   get slidesToShow(): any[] {
-    if (this.isProfileComplete()) {
-      return this.slides.slice(1);
-    } else {
-      return this.slides;
-    }
+    return this.carrocel
+      ? this.slides.filter(slide => slide.title !== 'Inscription incomplète')
+      : this.slides;
   }
+
+  // get slidesToShow(): any[] {
+  //   if (this.isProfileComplete()) {
+  //     return this.slides.slice(1);
+  //   } else {
+  //     return this.slides;
+  //   }
+  // }
   onPaySubmit(): void {
     console.log('Rechargement du solde');
   }
@@ -145,7 +162,9 @@ export class ClientDashboardComponent implements OnInit {
     console.log('Retrait du solde');
   }
   onSearch(): void {
-    this.router.navigate(['/search'], { queryParams: this.searchCriteria });
+    const typeService = this.searchForm.value.typeService;
+    const [minPrice, maxPrice] = this.searchForm.value.tranche.split('-');
+    this.router.navigateByUrl(`/search/${typeService}/${minPrice}/${maxPrice}`);
   }
 
 }

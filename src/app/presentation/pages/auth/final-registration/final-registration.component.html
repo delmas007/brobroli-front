@@ -1,58 +1,92 @@
 <main>
     <div class="registration-container">
         <div class="flex justify-center items-center mb-4">
-            <span class="text-2xl font-bold">Complétion de l'inscription {{ userRole === 'provider' ? 'Prestataire' : 'Client' }}</span>
+            <span class="text-2xl font-bold">Complétion de l'inscription {{ this.state.authState.role === 'SCOPE_PROVIDER' ? 'Prestataire' : 'Client' }}</span>
         </div>
 
         <div class="progress-bar">
           <div class="progress" [style.width]="(currentStep / totalSteps) * 100 + '%'"></div>
         </div>
 
-        <form (ngSubmit)="onSubmit()">
-          <div *ngFor="let questionGroup of questions[userRole][currentStep - 1]; let i = index">
-            <div class="form-row">
-              <label [for]="'question' + i">{{ questionGroup.question }}</label>
+      <form (ngSubmit)="onSubmit()">
+        <div *ngFor="let questionGroup of getCurrentQuestions(); let i = index">
+          <div class="form-row">
+            <label [for]="'question' + i">{{ questionGroup.question }}</label>
 
-              <ng-container [ngSwitch]="questionGroup.type">
+            <ng-container [ngSwitch]="questionGroup.type">
+              <ng-container *ngIf="questionGroup.field">
+                <!-- Input text -->
                 <input *ngSwitchCase="'text'"
-                  [id]="'question' + i"
-                  [(ngModel)]="answers[questionGroup.question]"
-                  [name]="'question' + i"
-                  type="text"
-                  required>
+                       [id]="'question' + i"
+                       [(ngModel)]="answers[questionGroup.field]"
+                       [name]="'question' + i"
+                       type="text"
+                       required>
 
+                <input *ngSwitchCase="'file'"
+                       [id]="'question' + i"
+                       (change)="onFileChange($event, questionGroup.field)"
+                       [name]="'question' + i"
+                       type="file"
+                       required>
+                <input *ngSwitchCase="'number'"
+                       [id]="'question' + i"
+                       [(ngModel)]="answers[questionGroup.field]"
+                       [name]="'question' + i"
+                       type="number"
+                       min="0"
+                       required>
+
+                <!-- Textarea -->
                 <textarea *ngSwitchCase="'textarea'"
-                  [id]="'question' + i"
-                  [(ngModel)]="answers[questionGroup.question]"
-                  [name]="'question' + i"
-                  required></textarea>
+                          [id]="'question' + i"
+                          [(ngModel)]="answers[questionGroup.field]"
+                          [name]="'question' + i"
+                          required></textarea>
 
+                <!-- Select dropdown -->
                 <select *ngSwitchCase="'select'"
-                  [id]="'question' + i"
-                  [(ngModel)]="answers[questionGroup.question]"
-                  [name]="'question' + i"
-                  required>
+                        [id]="'question' + i"
+                        [(ngModel)]="answers[questionGroup.field]"
+                        [name]="'question' + i"
+                        required>
                   <option *ngFor="let option of questionGroup.options" [value]="option">{{ option }}</option>
                 </select>
 
+                <!-- Checkbox group -->
                 <div *ngSwitchCase="'checkbox'">
                   <div *ngFor="let option of questionGroup.options; let j = index">
                     <input type="checkbox"
-                      [id]="'question' + i + '_' + j"
-                      [(ngModel)]="answers[questionGroup.question][j]"
-                      [name]="'question' + i + '_' + j">
+                           [id]="'question' + i + '_' + j"
+                           [(ngModel)]="answers[questionGroup.field][j]"
+                           [name]="'question' + i + '_' + j">
                     <label [for]="'question' + i + '_' + j">{{ option }}</label>
                   </div>
                 </div>
               </ng-container>
-            </div>
+            </ng-container>
           </div>
-          <span class="text-center mt-4">En cliquant sur "Terminer", vous acceptez nos <a class="terms-link" routerLink="/terms-and-conditions">conditions d'utilisation</a>.</span>
-          <div class="navigation-buttons">
-            <button type="button" class="btn-link" (click)="previousStep()" [disabled]="currentStep === 1">Précédent</button>
-            <button type="button" class="btn-link" *ngIf="currentStep < totalSteps" (click)="nextStep()">Suivant</button>
-            <button type="submit" class="btn-link" *ngIf="currentStep === totalSteps">Terminer</button>
-          </div>
-        </form>
-      </div>
+        </div>
+
+        <span class="text-center mt-4">
+    En cliquant sur "Terminer", vous acceptez nos
+    <a class="terms-link" routerLink="/terms-and-conditions">conditions d'utilisation</a>.
+  </span>
+
+        <div class="navigation-buttons">
+          <button type="button" class="btn-link" (click)="previousStep()" [disabled]="currentStep === 1">Précédent</button>
+          <button type="button" class="btn-link" *ngIf="currentStep < totalSteps" (click)="nextStep()">Suivant</button>
+          <button type="submit" class="btn-link" *ngIf="currentStep === totalSteps">Terminer</button>
+        </div>
+      </form>
+
+
+    </div>
+  <div class="modal" [class.show]="isModalOpen">
+    <div class="modal-content">
+      <h2>Succès</h2>
+      <p>Service ajouté avec succès !</p>
+      <button (click)="closeModal()">OK</button>
+    </div>
+  </div>
 </main>
