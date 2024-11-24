@@ -23,12 +23,13 @@ export class PrestataireDashboardComponent implements OnInit {
   }
   menuOpen = false;
   modalWithdrawOpen = false;
-
+  carrocel = false;
   balance: any ;
   currentUser: Person | null = null;
   users: User[] = [];
   slides: any[] = [];
   sumForm!: FormGroup;
+  urlImage!:string;
 
   ngOnInit(): void {
     this.getProlfil();
@@ -45,6 +46,10 @@ export class PrestataireDashboardComponent implements OnInit {
       data => {
         console.log(data);
         this.balance= data.balance.sum
+        this.urlImage = data.urlProfil;
+        if (data.firstName !== null) {
+          this.carrocel = true;
+        }
       },
       error => {
         console.log(error);
@@ -93,11 +98,9 @@ export class PrestataireDashboardComponent implements OnInit {
   }
 
   get slidesToShow(): any[] {
-    if (this.isProfileComplete()) {
-      return this.slides.slice(1);
-    } else {
-      return this.slides;
-    }
+    return this.carrocel
+      ? this.slides.filter(slide => slide.title !== 'Inscription incomplète')
+      : this.slides;
   }
   onPaySubmit(): void {
     console.log('Rechargement du solde');

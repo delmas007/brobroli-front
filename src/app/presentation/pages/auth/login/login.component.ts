@@ -62,14 +62,14 @@ export class LoginComponent implements OnInit {
       next: (data: any) => {
         localStorage.setItem('token', data.id_token);
         this.state.loadToken();
-
         const role = this.state.authState.role;
         if (role === 'SCOPE_CUSTOMER') {
           this.router.navigate(['/dashboard-client']);
         } else if (role === 'SCOPE_PROVIDER') {
           this.router.navigate(['/dashboard-prestataire']);
+        }else if (role === 'SCOPE_ADMIN') {
+          this.router.navigate(['/admin']);
         }
-
         this.loading = false;
       },
       error: (err: any) => {
