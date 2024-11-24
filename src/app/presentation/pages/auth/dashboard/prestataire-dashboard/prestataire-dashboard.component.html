@@ -31,7 +31,13 @@
                         <img loading="lazy" class="bell" src="media/images/notif.png" alt="">
                     </button>
                     <button (click)="menuOpen = !menuOpen" class="flex items-center text-gray-700">
-                        <img loading="lazy" class="h-12 w-12 rounded-full object-cover" src="media/images/profile.png" alt="Photo de profil">
+<!--                        <img loading="lazy" class="h-12 w-12 rounded-full object-cover" src="media/images/profile.png" alt="Photo de profil">-->
+                      <img
+                        loading="lazy"
+                        class="h-12 w-12 rounded-full object-cover"
+                        [src]="urlImage ? urlImage : 'media/images/profile.png'"
+                        alt="Photo de profil"
+                      />
                     </button>
 
 
@@ -46,10 +52,11 @@
             </header>
 
             <section class="dash-section-1">
-                <app-dash-slider-card
+              <app-dash-slider-card
                 [slides]="slidesToShow"
-                [autoSlide]="true">
-            </app-dash-slider-card>
+                [autoSlide]="true"
+                [parentComponent]="this">
+              </app-dash-slider-card>
                 <div class="card right">
                     <img class="wallet" src="media/images/wallet.png" alt="">
                     <p class="text-2xl text-center font-bold">{{ balance ? balance : 0 }} <span>Fcfa</span></p>

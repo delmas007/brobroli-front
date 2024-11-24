@@ -1,0 +1,38 @@
+image: node:20.15.1-alpine3.20
+
+stages:
+  - test-angular
+  - docker-push-hub
+
+test-angular:
+  stage: test-angular
+  only:
+    refs:
+      - develop
+      - main
+  script:
+    - npm ci
+    - npm run test -- --watch=false --no-progress --browsers=ChromeHeadless
+
+deploy-to-docker-hub:
+  stage: docker-push-hub
+  only:
+    refs:
+      - main
+  before_script:
+    - apt-get update && apt-get install -y jq
+  script:
+    - npm ci
+
+    - npm run build -- --prod --output-path=dist/brobroli-front
+
+    - VERSION=$(jq -r '.version' package.json)
+
+    - docker build -t delmas007/brobroli-front .
+
+    - docker tag delmas007/brobroli-front delmas007/brobroli-front:$VERSION
+
+    - echo "${DOCKER_HUB_PASSWORD}" | docker login -u "${DOCKER_HUB_USERNAME}" --password-stdin
+
+    - docker push delmas007/brobroli-front
+    - docker push delmas007/brobroli-front:$VERSION

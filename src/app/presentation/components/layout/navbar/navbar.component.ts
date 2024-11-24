@@ -62,4 +62,8 @@ export class NavbarComponent implements OnInit {
       this.isScrolled = false;
     }
   }
+
+  dashboard() {
+   this.router.navigate(['/projects-customer']);
+  }
 }
