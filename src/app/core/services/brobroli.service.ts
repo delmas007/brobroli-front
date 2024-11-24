@@ -18,10 +18,10 @@ export class BrobroliService {
 
   constructor(private http: HttpClient) { }
 
-  inscriptionProvider(donnee:Inscription): Observable<any> {
+  inscriptionProvider(donnee:FormData): Observable<any> {
     return this.http.post<any>(`${this.hostAuth}/providers`, donnee);
   }
-  inscriptionCustomer(donnee:Inscription): Observable<any> {
+  inscriptionCustomer(donnee:FormData): Observable<any> {
     return this.http.post<any>(`${this.hostAuth}/customers`, donnee);
   }
   login(donnee:Login): Observable<any> {
@@ -95,7 +95,7 @@ export class BrobroliService {
     return this.http.get<any>(`${this.host}/v1/admin`);
   }
   getServices(): Observable<any> {
-    return this.http.get<any>(`${this.host}/v1/admin/services`);
+    return this.http.get<any>(`${this.host}/v1/admin/service`);
   }
   getCustomers(): Observable<any> {
     return this.http.get<any>(`${this.host}/v1/admin/customers`);
@@ -120,5 +120,11 @@ export class BrobroliService {
   }
   deactivateCustomer(id:number): Observable<any> {
     return this.http.put<any>(`${this.host}/v1/admin/customer/deactivate/${id}`, {});
+  }
+  updateCustomer(donnee:FormData,id:number): Observable<any> {
+    return this.http.put<any>(`${this.host}/customers/${id}`, donnee);
+  }
+  updateProvider(donnee:FormData,id:number): Observable<any> {
+    return this.http.put<any>(`${this.host}/providers/${id}`, donnee);
   }
 }

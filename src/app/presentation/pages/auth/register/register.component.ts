@@ -17,6 +17,7 @@ import {StateService} from "@services/state.service";
 })
 export class RegisterComponent implements OnInit {
 
+  formData:FormData = new FormData();
   errorMessage: any;
   formRegister!: FormGroup;
   loading = false;
@@ -82,11 +83,14 @@ export class RegisterComponent implements OnInit {
     this.donnee.user.password = formValues.password;
     this.donnee.email = formValues.email;
 
+    this.formData.append("email", formValues.email);
+    this.formData.append("user.userName", formValues.username);
+    this.formData.append("user.password", formValues.password);
 
     const request =
       formValues.choix === "customer"
-      ? this.service.inscriptionCustomer(this.donnee)
-      : this.service.inscriptionProvider(this.donnee);
+      ? this.service.inscriptionCustomer(this.formData)
+      : this.service.inscriptionProvider(this.formData);
 
     request.subscribe({
       next: (data) => {

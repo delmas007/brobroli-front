@@ -1,15 +1,15 @@
 import {Component, OnInit, OnChanges, SimpleChanges, signal} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import { Router } from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { BrobroliService } from "@services/brobroli.service";
 import { StateService } from "@services/state.service";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-services-page',
   standalone: true,
-  imports: [MatIconModule, ReactiveFormsModule, NgForOf],
+  imports: [MatIconModule, ReactiveFormsModule, NgForOf, RouterLink, NgIf],
   templateUrl: './services-page.component.html',
   styleUrls: ['./services-page.component.css']
 })
