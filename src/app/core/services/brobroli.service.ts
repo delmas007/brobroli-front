@@ -127,4 +127,7 @@ export class BrobroliService {
   updateProvider(donnee:FormData,id:number): Observable<any> {
     return this.http.put<any>(`${this.host}/providers/${id}`, donnee);
   }
+  getProviderAuth(id:number): Observable<any> {
+    return this.http.get<any>(`${this.hostAuth}/${id}`);
+  }
 }

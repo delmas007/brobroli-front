@@ -15,7 +15,7 @@ import {BalanceSum} from "@interfaces/balanceSum";
 @Component({
   selector: 'app-client-dashboard',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive, DashSliderCardComponent, MatSlideToggleModule, MatIconModule, FormsModule, TableModule, ReactiveFormsModule],
+  imports: [CommonModule, RouterLink, DashSliderCardComponent, MatSlideToggleModule, MatIconModule, FormsModule, TableModule, ReactiveFormsModule],
   templateUrl: './client-dashboard.component.html',
   styleUrls: ['./client-dashboard.component.css']
 })
@@ -89,12 +89,12 @@ export class ClientDashboardComponent implements OnInit {
   getProlfil(): void {
     this.service.getCustomer(this.state.authState.id).subscribe(
       data => {
-        console.log(data);
-        this.urlImage = data.urlProfil;
-        this.balance= data.balance.sum
         if (data.firstName !== null) {
           this.carrocel = true;
         }
+        console.log(data);
+        this.urlImage = data.urlProfil;
+        this.balance= data.balance.sum
       },
       error => {
         console.log(error);
@@ -165,6 +165,19 @@ export class ClientDashboardComponent implements OnInit {
     const typeService = this.searchForm.value.typeService;
     const [minPrice, maxPrice] = this.searchForm.value.tranche.split('-');
     this.router.navigateByUrl(`/search/${typeService}/${minPrice}/${maxPrice}`);
+  }
+  deconnexion() {
+    localStorage.removeItem('token');
+    this.state.setAuthState({
+      id : undefined,
+      isAuthenticated : false,
+      username : undefined,
+      role : undefined,
+      token: undefined,
+      mail: undefined
+    });
+    this.router.navigate(['/login']);
+
   }
 
 }

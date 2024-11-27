@@ -57,10 +57,9 @@ export class ProjectsProviderComponent implements OnInit {
       data => {
         this.pendingCollaborations = [];
         this.otherCollaborations = [];
-
         data.forEach((item: any) => {
           const newCollaboration: Collaboration = {
-            firstNameCutomer: item.provider?.firstName || 'N/A',
+            firstNameCutomer: item.customer?.firstName || 'N/A',
             serviceDescription: item.service?.description || 'N/A',
             crationDateCollaboration: item.createAt || 'N/A',
             status: item.status || 'N/A',
@@ -186,6 +185,19 @@ export class ProjectsProviderComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+  deconnexion() {
+    localStorage.removeItem('token');
+    this.state.setAuthState({
+      id : undefined,
+      isAuthenticated : false,
+      username : undefined,
+      role : undefined,
+      token: undefined,
+      mail: undefined
+    });
+    this.router.navigate(['/login']);
+
   }
 
 }
