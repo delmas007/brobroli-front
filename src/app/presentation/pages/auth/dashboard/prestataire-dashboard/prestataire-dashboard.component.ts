@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import { CommonModule,  } from '@angular/common';
-import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+import {RouterOutlet, RouterLink, RouterLinkActive, Router} from '@angular/router';
 import { DashSliderCardComponent } from '@shared/dash-slider-card/dash-slider-card.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatIconModule } from '@angular/material/icon';
@@ -14,12 +14,12 @@ import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/
 @Component({
   selector: 'app-prestataire-dashboard',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive, DashSliderCardComponent, MatSlideToggleModule, MatIconModule, ReactiveFormsModule],
+  imports: [CommonModule, RouterLink, DashSliderCardComponent, MatSlideToggleModule, MatIconModule, ReactiveFormsModule],
   templateUrl: './prestataire-dashboard.component.html',
   styleUrl: './prestataire-dashboard.component.css'
 })
 export class PrestataireDashboardComponent implements OnInit {
-  constructor(private service: BrobroliService, private state: StateService,private fb:FormBuilder) {
+  constructor(private service: BrobroliService, private state: StateService,private fb:FormBuilder,private router:Router) {
   }
   menuOpen = false;
   modalWithdrawOpen = false;
@@ -107,5 +107,18 @@ export class PrestataireDashboardComponent implements OnInit {
   }
   onWithdrawSubmit(): void {
     console.log('Retrait du solde');
+  }
+  deconnexion() {
+    localStorage.removeItem('token');
+    this.state.setAuthState({
+      id : undefined,
+      isAuthenticated : false,
+      username : undefined,
+      role : undefined,
+      token: undefined,
+      mail: undefined
+    });
+    this.router.navigate(['/login']);
+
   }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import {Router, RouterModule} from '@angular/router';
+import {StateService} from "@services/state.service";
 
 @Component({
   selector: 'app-admin-dash',
@@ -12,7 +13,7 @@ import { RouterModule } from '@angular/router';
 export class AdminDashComponent implements OnInit {
   isAsideOpen:boolean = true;
   isServicesOpen: boolean = false;
-  constructor() { }
+  constructor(private state: StateService,private router:Router) { }
 
   ngOnInit() {
   }
@@ -20,7 +21,16 @@ export class AdminDashComponent implements OnInit {
   asideToggle(){
 
   }
-  retour(){
-
+  logout() {
+    localStorage.removeItem('token');
+    this.state.setAuthState({
+      id : undefined,
+      isAuthenticated : false,
+      username : undefined,
+      role : undefined,
+      token: undefined,
+      mail: undefined
+    });
+    this.router.navigate(['/login']);
   }
 }

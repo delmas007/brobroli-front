@@ -2,7 +2,7 @@
   <section>
     <aside>
       <div class="w-full">
-        <h4 ><i class="pi pi-cog"></i><span class="font-bold">Board</span></h4>
+        <h4 ><i class="pi pi-cog"></i><span class="font-bold">Tableau de bord</span></h4>
         <hr class="my-3 ">
       </div>
       <div class=" flex-col justify-start py-2">
@@ -15,7 +15,7 @@
       </div>
       <div class="py-2 w-full">
         <hr class="my-3 ">
-        <a (click)="retour()" routerLink="/dashboard" class="btn-retour"><i class="pi pi-angle-left"></i>Retour</a>
+        <a (click)="logout()" routerLink="/dashboard" class="btn-retour"><i class="pi pi-angle-left"></i>Déconnexion</a>
       </div>
     </aside>
     <button (click)="asideToggle()"title="sidebar" type="button" class="aside-btn" [ngClass]="{'open': isAsideOpen}">

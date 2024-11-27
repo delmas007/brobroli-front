@@ -15,20 +15,20 @@ export class NavbarComponent implements OnInit {
   isScrolled = false;
   isMenuOpen = false;
   isAuth = false;
-  statee : any = {
-    id : undefined,
-    isAuthenticated : false,
-    username : undefined,
-    role : undefined,
-    token: undefined,
-  }
 
   constructor(private state :StateService,private router: Router) {
   }
   deconnexion() {
-    this.state.setAuthState(this.statee);
-    localStorage.removeItem('token');
-    this.router.navigate(['/login']);
+      localStorage.removeItem('token');
+      this.state.setAuthState({
+        id : undefined,
+        isAuthenticated : false,
+        username : undefined,
+        role : undefined,
+        token: undefined,
+        mail: undefined
+      });
+      this.router.navigate(['/login']);
 
   }
 

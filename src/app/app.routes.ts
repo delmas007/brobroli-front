@@ -30,6 +30,12 @@ import {ResetPassawordComponent} from "@auth/reset-passaword/reset-passaword.com
 import {VerifyCodeComponent} from "@auth/verify-code/verify-code.component";
 import { AdminValidateComponent } from './presentation/components/shared/admin-validate/admin-validate.component';
 import {AdminPublierComponent} from "@shared/admin-publier/admin-publier.component";
+import {NotAuthorizedComponent} from "@pages/not-authorized/not-authorized.component";
+import {SessionComponent} from "@pages/session/session.component";
+import {AuthenticationGuard} from "@guards/authentication.guard";
+import {AuthorizationGuard_SCOPE_PROVIDER} from "@guards/authorization-provider.guard";
+import {AuthorizationGuard_SCOPE_CUSTOMER} from "@guards/authorization-customer.guard";
+import {AuthorizationGuard_SCOPE_ADMIN} from "@guards/authorization-admin.guard";
 export const routes: Routes = [
 
     { path: '', component: HomeComponent },
@@ -37,11 +43,13 @@ export const routes: Routes = [
     { path: 'forgot-password', component: ForgotPasswordComponent },
     { path: 'reset-password', component: ResetPassawordComponent},
     { path: 'verify-code', component:  VerifyCodeComponent},
-    { path: 'add-service', component: ServicesPageComponent },
-    { path: 'dashboard-client', component: ClientDashboardComponent},
-    { path: 'dashboard-prestataire', component: PrestataireDashboardComponent},
+    { path: 'add-service', component: ServicesPageComponent,canActivate:[AuthenticationGuard,AuthorizationGuard_SCOPE_PROVIDER] },
+    { path: 'dashboard-client', component: ClientDashboardComponent,canActivate:[AuthenticationGuard,AuthorizationGuard_SCOPE_CUSTOMER]},
+    { path: 'dashboard-prestataire', component: PrestataireDashboardComponent,canActivate:[AuthenticationGuard,AuthorizationGuard_SCOPE_PROVIDER]},
     { path: 'register', component: RegisterComponent },
     { path: 'settings', component: SettingsComponent },
+    { path: "notAuthorized", component: NotAuthorizedComponent },
+    { path: "sessionExpired", component: SessionComponent },
     { path: 'sidebar', component: SidebarComponent,
       children:[
         { path: 'profiles', component: ProfileComponent },
@@ -53,22 +61,22 @@ export const routes: Routes = [
     },
 
     { path: 'search/:typeService/:minPrice/:maxPrice', component: SearchComponent },
-    { path: 'final-registration', component: FinalRegistrationComponent },
-    { path: 'profile', component: CollabProfileComponent },
-    { path: 'projects-customer', component: ProjectsCustomerComponent },
-    { path: 'projects-provider', component: ProjectsProviderComponent },
+    { path: 'final-registration', component: FinalRegistrationComponent,canActivate:[AuthenticationGuard] },
+    { path: 'profile/:id', component: CollabProfileComponent,canActivate:[AuthenticationGuard] },
+    { path: 'projects-customer', component: ProjectsCustomerComponent,canActivate:[AuthenticationGuard,AuthorizationGuard_SCOPE_CUSTOMER] },
+    { path: 'projects-provider', component: ProjectsProviderComponent,canActivate:[AuthenticationGuard,AuthorizationGuard_SCOPE_PROVIDER] },
     { path: 'terms-and-conditions', component: UsageConditionComponent },
-    { path: 'add-competence', component: SkillsAddComponent },
+    { path: 'add-competence', component: SkillsAddComponent ,canActivate:[AuthenticationGuard,AuthorizationGuard_SCOPE_PROVIDER]},
 
-    { path:'admin', component: AdminDashComponent,
+    { path:'admin', component: AdminDashComponent,canActivate:[AuthenticationGuard],
       children:[
         { path: '', redirectTo: 'accueil', pathMatch: 'full' },
-        { path: 'accueil', component: AdminAccueilComponent },
-        { path: 'services/attente', component: AdminValidateComponent },
-        { path: 'services/publier', component: AdminPublierComponent },
-        { path: 'customers', component: AdminCustomersComponent },
-        { path: 'providers', component: AdminProvidersComponent },
-        { path: 'settings', component: AdminSettingsComponent },
+        { path: 'accueil', component: AdminAccueilComponent,canActivate:[AuthorizationGuard_SCOPE_ADMIN] },
+        { path: 'services/attente', component: AdminValidateComponent,canActivate:[AuthorizationGuard_SCOPE_ADMIN] },
+        { path: 'services/publier', component: AdminPublierComponent,canActivate:[AuthorizationGuard_SCOPE_ADMIN] },
+        { path: 'customers', component: AdminCustomersComponent,canActivate:[AuthorizationGuard_SCOPE_ADMIN] },
+        { path: 'providers', component: AdminProvidersComponent,canActivate:[AuthorizationGuard_SCOPE_ADMIN] },
+        { path: 'settings', component: AdminSettingsComponent,canActivate:[AuthorizationGuard_SCOPE_ADMIN] },
 
       ]
     },

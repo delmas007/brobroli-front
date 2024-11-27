@@ -1,15 +1,14 @@
 <main>
   <header class="header">
     <img class="logo" src="media/images/Logo.png" alt="Logo">
-    <img class="retour" src="media/images/retour.png" alt="Logo">
-
+    <a routerLink="/dashboard-client" class="retour">retour</a>
   </header>
 
   <div class="profile-container">
     <!-- Section gauche, photo et description -->
     <section class="profile-left">
       <div class="profile-photo">
-        <img [src]="currentUser?.photoUrl || 'media/images/profile.png'" alt="Profile Picture">
+        <img [src]="currentUser?.urlProfil || 'media/images/profile.png'" alt="Profile Picture">
       </div>
       <div class="profile-summary">
         <h3 >{{ currentUser?.firstName }} {{ currentUser?.lastName }}</h3>
@@ -24,8 +23,8 @@
         <h3>Compétences principales</h3>
         <ul>
           <li *ngFor="let skill of currentUser?.skillLevels">
-            <span class="skill-name">{{ skill.name }}</span>
-            <span class="skill-level">({{ skill.level }})</span>
+            <span class="skill-name">{{ skill.skillName }}</span>
+            <span class="skill-level">({{ skill.skillLevel }})</span>
           </li>
         </ul>
       </div>
