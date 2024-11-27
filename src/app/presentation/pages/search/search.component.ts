@@ -105,7 +105,7 @@ export class SearchComponent implements OnInit {
           this.errorMessage = "Votre solde est insuffisant pour effectuer cette collaboration. Veuillez recharger votre compte.";
         }else {
           console.log(response);
-          this.router.navigate(['/profile']);
+          this.router.navigateByUrl(`/profile/${response.service.provider.id}`);
         }
       },
       (error: any) => {

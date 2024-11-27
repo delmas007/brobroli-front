@@ -1,37 +1,51 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {MatIconModule} from "@angular/material/icon";
 import {Person} from "@interfaces/person";
+import {ActivatedRoute, RouterLink} from "@angular/router";
+import {BrobroliService} from "@services/brobroli.service";
 
 @Component({
   selector: 'app-collab-profile',
   templateUrl: './collab-profile.component.html',
-  imports: [MatIconModule, CommonModule],
+  imports: [MatIconModule, CommonModule, RouterLink],
   standalone: true,
   styleUrls: ['./collab-profile.component.css']
 })
 
-export class CollabProfileComponent {
+export class CollabProfileComponent implements OnInit {
   currentUser: Person | null = null;
   modalImage: string | null = null;
-
-  ngOnInit(): void {
-    this.getCurrentUser();
+  constructor(private service: BrobroliService,private activatedRoute : ActivatedRoute) {
   }
 
-  getCurrentUser(): void {
+  ngOnInit(): void {
+    const id  = this.activatedRoute.snapshot.params['id']
+    this.service.getProviderAuth(id).subscribe({
+      next: (response) => {
+        this.getCurrentUser(response);
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    })
+
+  }
+
+  getCurrentUser(data: any) {
+    console.log(data);
     this.currentUser = {
-      id: 1,
+      id: data.id,
       slug: 'utilisateur-1',
-      firstName: 'KARIM',
-      lastName: 'FAWAS',
-      urlProfil: 'http://example.com/profil/jean-dupont',
-      email: 'jean.dupont@example.com',
-      city: 'Paris',
-      tel: '0123456789',
-      street: '123 Rue de Paris',
-      biographie: 'Développeur passionné avec 10 ans d\'expérience.',
-      photoUrl: 'media/images/profile.png',
+      firstName: data.firstName,
+      lastName: data.lastName,
+      urlProfil: data.urlProfil,
+      email: data.email,
+      city: data.city,
+      tel: data.tel,
+      street: data.street,
+      biographie: data.biographie,
+      photoUrl: data.photoUrl,
       profession: 'Développeur Full Stack',
       certifications: [
         {
@@ -48,13 +62,9 @@ export class CollabProfileComponent {
         }
       ],
       competences: ['Angular', 'TypeScript', 'Node.js'],
-      skillLevels: [
-        { name: 'Angular', level: 'Expert' },
-        { name: 'JavaScript', level: 'Avancé' },
-        { name: 'Node.js', level: 'Intermédiaire' },
-      ],
-      createAt: new Date('2020-01-01'),
-      updateAt: new Date('2021-01-01'),
+      skillLevels: data.skills,
+      createAt: data.createAt,
+      updateAt: data.updateAt,
       balance: [],
       user: [],
     };
