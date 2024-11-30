@@ -35,7 +35,8 @@ export class SearchComponent implements OnInit {
     price: 0,
     provider: {
       id: 0,
-      skills: []
+      skills: [],
+      city: ""
     },
     typeService: ""
   }
@@ -71,6 +72,7 @@ export class SearchComponent implements OnInit {
     });
     this.service.search(this.typeService, this.minPrice, this.maxPrice).subscribe(
       (response: any) => {
+        console.log(response);
         for (let i = 0; i < response.length; i++) {
           if (response[i].status === 'VALID') {
             const providerSkills = response[i].provider.skills.map((skill: { skillName: string }) => skill.skillName);
@@ -81,7 +83,8 @@ export class SearchComponent implements OnInit {
               price: response[i].price,
               provider: {
                 id: response[i].provider.id,
-                skills: providerSkills
+                skills: providerSkills,
+                city: response[i].provider.city
               },
               typeService: response[i].typeService
             };

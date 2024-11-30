@@ -49,16 +49,34 @@ export class CollabProfileComponent implements OnInit {
       profession: 'Développeur Full Stack',
       certifications: [
         {
-          name: 'Certification JAVA SPRING BOOT UDEMY',
+          name: 'Bien débuter avec Spring et Spring Boot pour Java',
+          link: 'https://www.udemy.com/certificate/UC-9c534d7b-e4e3-4811-9233-625438fc6f35/',
+          description: 'Bien débuter avec Spring et Spring Boot pour Java',
+          imageUrl: ''
+        },
+        {
+          name: 'Git & GitHub Mastery | Valable pour 2021',
           link: 'https://urlz.fr/t8x4',
-          description: 'Certification complète JAVA SPRING BOOT sur Udemy.',
+          description: 'Git & GitHub Mastery | Valable',
+          imageUrl: ''
+        },
+        {
+          name: 'Keycloak integration with Spring Boot 3',
+          link: 'https://www.udemy.com/certificate/UC-7a884d98-defd-4fa1-b5ac-992e93d38b0b/',
+          description: 'Développeur WEB Fullstack avec Spring et React',
           imageUrl: ''
         },
         {
           name: 'Certificat Angular',
           link: '',
           description: 'Certificat Angular délivré par Atos.',
-          imageUrl: 'media/images/certificat.jpeg'
+          imageUrl: 'media/images/certif.jpg'
+        },
+        {
+          name: 'Certificat java',
+          link: '',
+          description: 'Certificat Angular délivré par Atos.',
+          imageUrl: 'media/images/images.png'
         }
       ],
       competences: ['Angular', 'TypeScript', 'Node.js'],

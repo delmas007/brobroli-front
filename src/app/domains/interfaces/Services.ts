@@ -8,6 +8,7 @@ export interface Services {
   provider: {
     id: number;
     skills: Skill[];
+    city: string;
   };
   typeService: string;
 }
