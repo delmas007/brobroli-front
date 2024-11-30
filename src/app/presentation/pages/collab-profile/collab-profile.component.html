@@ -34,17 +34,17 @@
         <div *ngFor="let cert of currentUser?.certifications">
           <!--  lien des  certifications -->
           <a *ngIf="cert.link" class="cert-link" [href]="cert.link" target="_blank">{{ cert.description }}</a>
-          <a *ngIf="cert.link" class="cert-link" [href]="cert.link" target="_blank">{{ cert.description }}</a>
-          <a *ngIf="cert.link" class="cert-link" [href]="cert.link" target="_blank">{{ cert.description }}</a>
-          <a *ngIf="cert.link" class="cert-link" [href]="cert.link" target="_blank">{{ cert.description }}</a>
+<!--          <a *ngIf="cert.link" class="cert-link" [href]="cert.link" target="_blank">{{ cert.description }}</a>-->
+<!--          <a *ngIf="cert.link" class="cert-link" [href]="cert.link" target="_blank">{{ cert.description }}</a>-->
+<!--          <a *ngIf="cert.link" class="cert-link" [href]="cert.link" target="_blank">{{ cert.description }}</a>-->
 
           <!-- Image pour les certifications -->
           <img *ngIf="cert.imageUrl" class="cert-image " [src]="cert.imageUrl" alt="{{ cert.name }}" (click)="openModal(cert)">
            <p *ngIf="cert.imageUrl" class="cert-description ">{{ cert.description }}</p>
-          <img *ngIf="cert.imageUrl" class="cert-image " [src]="cert.imageUrl" alt="{{ cert.name }}" (click)="openModal(cert)">
-          <p *ngIf="cert.imageUrl" class="cert-description ">{{ cert.description }}</p>
-          <img *ngIf="cert.imageUrl" class="cert-image " [src]="cert.imageUrl" alt="{{ cert.name }}" (click)="openModal(cert)">
-          <p *ngIf="cert.imageUrl" class="cert-description ">{{ cert.description }}</p>
+<!--          <img *ngIf="cert.imageUrl" class="cert-image " [src]="cert.imageUrl" alt="{{ cert.name }}" (click)="openModal(cert)">-->
+<!--          <p *ngIf="cert.imageUrl" class="cert-description ">{{ cert.description }}</p>-->
+<!--          <img *ngIf="cert.imageUrl" class="cert-image " [src]="cert.imageUrl" alt="{{ cert.name }}" (click)="openModal(cert)">-->
+<!--          <p *ngIf="cert.imageUrl" class="cert-description ">{{ cert.description }}</p>-->
         </div>
       </div>
 

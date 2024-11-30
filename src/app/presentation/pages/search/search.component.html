@@ -93,7 +93,7 @@
         <div class="card-bottom">
           <div>
             <p class="price">{{ formatPrice(service.price)}}</p>
-            <p class="location">Cocody</p>
+            <p class="location">{{service.provider.city}}</p>
           </div>
           <a (click)="openCollabModal(service.id, service.price)" class="btn-link">Collaborer</a>
 

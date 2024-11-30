@@ -31,7 +31,7 @@ export class ServicesPageComponent implements OnInit {
   titlebyTypeService = signal<string[]>([]);
 
   serviceObject: { [key: string]: string[] } = {
-    DEVELOPPEMENT_WEB: ['HTML', 'CSS', 'ANGULAR'],
+    DEVELOPPEMENT_WEB: ['Sites vitrines', 'Sites e-commerce', 'Applications web', 'Blogs et portails'],
     DEVELOPPEMENT_MOBILE: ['ANDROID', 'KOTLIN', 'FLUTTER'],
     DESIGN_GRAPHIQUE: ['Photoshop', 'Illustrator', 'Figma'],
     MARKETING: ['Stratégie de contenu', 'Publicité numérique', 'Analyse et reporting marketing'],
